@@ -4,7 +4,7 @@ var fs = require('fs');
 
 module.exports = {
   secure: {
-    ssl: true,
+    ssl: false,
     privateKey: './config/sslcerts/key.pem',
     certificate: './config/sslcerts/cert.pem',
     caBundle: './config/sslcerts/cabundle.crt'
@@ -82,7 +82,10 @@ module.exports = {
   mailer: {
     from: process.env.MAILER_FROM || 'MAILER_FROM',
     options: {
-      service: process.env.MAILER_SERVICE_PROVIDER || 'MAILER_SERVICE_PROVIDER',
+      host: process.env.SMTP_HOST || 'localhost',
+      post: process.env.SMTP_PORT || 25,
+      secure : process.env.SMTP_SECURE || true,
+      tls: process.env.SMTP_TSL || false,
       auth: {
         user: process.env.MAILER_EMAIL_ID || 'MAILER_EMAIL_ID',
         pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'

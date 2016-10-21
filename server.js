@@ -3,7 +3,7 @@
 /**
  * Module dependencies.
  */
-process.env.NODE_ENV = 'development';
+process.env.NODE_ENV = 'production';
 process.env.PORT = 3000;
 
 process.env.FACEBOOK_ID = '1705420716378030';
@@ -16,7 +16,7 @@ process.env.SESSION_SECRET = '8b798de65e3cd3dba8c136f2170e6654d3eea7b371c7ac053e
  * email server environments
  */
 process.env.MAILER_FROM = 'support@codevog.com';
-process.env.SMTP_HOST = 'email-smtp.eu-west-1.amazonaws.com'
+process.env.SMTP_HOST = 'email-smtp.eu-west-1.amazonaws.com';
 process.env.SMTP_PORT = 587;
 process.env.SMTP_SECURE = true;
 process.env.SMTP_TSL = false;

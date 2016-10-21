@@ -1,0 +1,2 @@
+Database Seeding:			Local seeduser added with password set to 97uYEVJfFQnUcfY5ZyeFKRB
+Database Seeding:			Local seedadmin added with password set to mM8PnDQtr36q59UcMaCaCRM

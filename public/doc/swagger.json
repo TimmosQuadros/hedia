@@ -1,0 +1,424 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Hedia API",
+        "description": "Hedia API",
+        "version": "1.0.1"
+    },
+    "host": "secucloud2.codevog.com",
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "basePath": "/api/v1/",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/register-user": {
+            "post": {
+                "summary": "Register User",
+                "description": "It should be performed after the authentication of facebook.",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "description": "User object",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/RegisterUserObject"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Register user"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "If success return auth token",
+                        "schema": {
+                            "$ref": "#/definitions/SignIndValidData"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "summary": "Login user",
+                "description": "Login user",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Login object",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/LoginUserObject"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Login user"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "If success return auth token",
+                        "schema": {
+                            "$ref": "#/definitions/SignIndValidData"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "delete": {
+                "summary": "Logout user",
+                "security": [
+                    {
+                        "auth_token": []
+                    }
+                ],
+                "tags": [
+                    "Logout user"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/SuccessEmptyData"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/get-user": {
+            "get": {
+                "summary": "Get User profile",
+                "security": [
+                    {
+                        "auth_token": []
+                    }
+                ],
+                "tags": [
+                    "User profile"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "If success return UserProfile",
+                        "schema": {
+                            "$ref": "#/definitions/UserProfileObject"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/update-user": {
+            "post": {
+                "summary": "Update Current User profile",
+                "security": [
+                    {
+                        "auth_token": []
+                    }
+                ],
+                "tags": [
+                    "UPdate user profile"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "If sucecss return User Profile",
+                        "schema": {
+                            "$ref": "#/definitions/UserProfileObject"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/password-reset": {
+            "post": {
+                "summary": "Reset password",
+                "description": "Reset password",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "description": "Reset Password  Object",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/ResetPasswordObject"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Reset password"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "If success send email to user with ResetPasswordToken",
+                        "schema": {
+                            "$ref": "#/definitions/SuccessEmptyData"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/password-recovery": {
+            "post": {
+                "summary": "Recovery password",
+                "description": "Recovery password",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "description": "token and new password in RequestBody",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/RecoveryPasswordObject"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Recovery password"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "If success save new password",
+                        "schema": {
+                            "$ref": "#/definitions/SuccessEmptyData"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/password-change": {
+            "post": {
+                "summary": "Change user password",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "description": "Curernt and new password",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/ChangePasswordObject"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "auth_token": []
+                    }
+                ],
+                "tags": [
+                    "Change password"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "If success save new password",
+                        "schema": {
+                            "$ref": "#/definitions/SuccessEmptyData"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Error": {
+            "type": "object",
+            "properties": {
+                "success": {
+                    "type": "boolean",
+                    "description": "Return false"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "Error message text"
+                }
+            }
+        },
+        "RegisterUserObject": {
+            "type": "object",
+            "properties": {
+                "firstName": {
+                    "type": "string",
+                    "description": "First name"
+                },
+                "lastName": {
+                    "type": "string",
+                    "description": "Last name"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Email"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "Password"
+                },
+                "provider": {
+                    "type": "string",
+                    "default": "local",
+                    "description": "Provider (local  or facebook)"
+                }
+            },
+            "required": [
+                "firstName",
+                "lastName",
+                "email",
+                "password"
+            ]
+        },
+        "UserProfileObject": {
+            "type": "object",
+            "properties": {
+                "firstName": {
+                    "type": "string",
+                    "description": "First name"
+                },
+                "lastName": {
+                    "type": "string",
+                    "description": "Last name"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Email"
+                },
+                "profileImageURL": {
+                    "type": "string",
+                    "description": "Avatar image Url"
+                }
+            }
+        },
+        "LoginUserObject": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "description": "Email"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "password"
+                }
+            },
+            "required": [
+                "email",
+                "password"
+            ]
+        },
+        "SignIndValidData": {
+            "type": "object",
+            "properties": {
+                "success": {
+                    "type": "boolean",
+                    "description": "Return true"
+                },
+                "token": {
+                    "description": "Auth token",
+                    "type": "string"
+                }
+            }
+        },
+        "SuccessEmptyData": {
+            "type": "object",
+            "properties": {
+                "success": {
+                    "type": "boolean",
+                    "description": "Return true"
+                }
+            }
+        },
+        "ResetPasswordObject": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "description": "Email for user recovery password"
+                }
+            }
+        },
+        "RecoveryPasswordObject": {
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string",
+                    "description": "Reset password token"
+                },
+                "newPassword": {
+                    "type": "string",
+                    "description": "New password"
+                }
+            }
+        },
+        "ChangePasswordObject": {
+            "type": "object",
+            "properties": {
+                "currentPassword": {
+                    "type": "string",
+                    "description": "Current password"
+                },
+                "newPassword": {
+                    "type": "string",
+                    "description": "New password"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "auth_token": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header",
+            "description": "Autorization: Hedia <token>"
+        }
+    }
+}

@@ -14,6 +14,7 @@ module.exports = function(app) {
   // edit current profile
   app.route('/api/v1/update-user').post([reqServ.checkJsonHeader, authServ.authByToken], apiController.userUpdate);
   app.route('/api/v1/get-user').get(authServ.authByToken, apiController.userProfile);
+  app.route('/api/v1/password-change').post(authServ.authByToken, apiController.changePassword);
 
   // auth APIs
   app.route('/api/v1/register-user').post(reqServ.checkJsonHeader, apiController.userRegister);
@@ -22,7 +23,7 @@ module.exports = function(app) {
 
   // passwords APIs
   app.route('/api/v1/password-reset').post(reqServ.checkJsonHeader, apiController.passwordReset);
-  app.route('/api/v1/password-update').post(reqServ.checkJsonHeader, apiController.passwordUpdate);
+  app.route('/api/v1/password-recovery').post(reqServ.checkJsonHeader, apiController.passwordRecovery);
 
   //upload
   app.route('/api/v1/avatar-upload').post(authServ.authByToken, apiController.uploadImage);

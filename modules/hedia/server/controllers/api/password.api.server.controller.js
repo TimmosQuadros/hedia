@@ -69,9 +69,7 @@ exports.passwordReset = function(req, res, next) {
       };
       smtpTransport.sendMail(mailOptions, function (err) {
         if (!err) {
-          res.send({success: true,
-            message: 'An email has been sent to the provided email with further instructions.'
-          });
+          res.jsonp({success: true});
         } else {
           return res.send({success: false,
             message: 'Failure sending email'
@@ -88,7 +86,7 @@ exports.passwordReset = function(req, res, next) {
   });
 }
 
-exports.passwordUpdate = function(req, res, next) {
+exports.passwordRecovery = function(req, res, next) {
   User.findOne({
     resetPasswordToken: req.body.token,
     resetPasswordExpires: {

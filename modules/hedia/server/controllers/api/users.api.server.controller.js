@@ -12,12 +12,12 @@ var path = require('path'),
 
 var safeUserObject = function(user){
   return {
-          displayName: validator.escape(user.displayName),
-          created: user.created.toString(),
-          profileImageURL: user.profileImageURL,
-          email: validator.escape(user.email),
-          lastName: validator.escape(user.lastName),
-          firstName: validator.escape(user.firstName)
+            displayName: validator.escape(user.displayName),
+            created: user.created.toString(),
+            profileImageURL: user.profileImageURL,
+            email: validator.escape(user.email),
+            lastName: validator.escape(user.lastName),
+            firstName: validator.escape(user.firstName)
          };
 }
 

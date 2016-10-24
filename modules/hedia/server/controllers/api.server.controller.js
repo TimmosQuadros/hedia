@@ -8,5 +8,7 @@ var _ = require('lodash');
 module.exports = _.extend(
   require('./api/histories.api.server.controller'),
   require('./api/users.api.server.controller'),
-  require('./api/auth.api.server.controller')
+  require('./api/auth.api.server.controller'),
+  require('./api/password.api.server.controller'),
+  require('./api/upload.api.server.controller')
 );

@@ -3,23 +3,28 @@
 /**
  * Module dependencies
  */
-var api = require('../controllers/api.server.controller'),
+var apiController = require('../controllers/api.server.controller'),
     authServ = require('../services/auth.api.server.service'),
     reqServ  = require('../services/check.request.server.service');
 
 module.exports = function(app) {
-  // UserApi Routes
   // test api
-  app.route('/api/v1/foo').get(api.userFoo);
+  app.route('/api/v1/foo').get(apiController.userFoo);
 
   // edit current profile
-  app.route('/api/v1/update-user').post([reqServ.checkJsonHeader, authServ.authByToken], api.userUpdate);
-  app.route('/api/v1/get-user').get(authServ.authByToken, api.userProfile);
+  app.route('/api/v1/update-user').post([reqServ.checkJsonHeader, authServ.authByToken], apiController.userUpdate);
+  app.route('/api/v1/get-user').get(authServ.authByToken, apiController.userProfile);
 
-  // auth users
-  app.route('/api/v1/register-user').post(reqServ.checkJsonHeader, api.userRegister);
-  app.route('/api/v1/login').post(reqServ.checkJsonHeader, api.login);
+  // auth APIs
+  app.route('/api/v1/register-user').post(reqServ.checkJsonHeader, apiController.userRegister);
+  app.route('/api/v1/login').post(reqServ.checkJsonHeader, apiController.login);
+  app.route('/api/v1/logout').delete(authServ.authByToken, apiController.logout);
 
-  app.route('/api/v1/logout').delete(authServ.authByToken, api.logout);
+  // passwords APIs
+  app.route('/api/v1/password-reset').post(reqServ.checkJsonHeader, apiController.passwordReset);
+  app.route('/api/v1/password-update').post(reqServ.checkJsonHeader, apiController.passwordUpdate);
+
+  //upload
+  app.route('/api/v1/avatar-upload').post(authServ.authByToken, apiController.uploadImage);
 };
 

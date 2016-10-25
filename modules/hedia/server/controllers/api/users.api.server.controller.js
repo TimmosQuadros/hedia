@@ -17,11 +17,13 @@ var safeUserObject = function(user){
             email: validator.escape(user.email),
             lastName: validator.escape(user.lastName),
             firstName: validator.escape(user.firstName),
-            desiredBloodGlucose: user.desiredBloodGlucose,
-            minBloodGlucose: user.minBloodGlucose,
-            maxBloodGlucose: user.maxBloodGlucose,
-            ratioCarbohydRateGlucose: user.ratioCarbohydRateGlucose,
-            sensitivityToInsuline: user.sensitivityToInsuline,
+            diabetesType: user.diabetesType,
+            dailyInsulinDosage: user.dailyInsulinDosage,
+            bloodSugarEtalon: user.bloodSugarEtalon,
+            lowBloodSugarLevel: user.lowBloodSugarLevel,
+            highBloodSugarLevel: user.highBloodSugarLevel,
+            insulinToCarbRatio: user.insulinToCarbRatio,
+            insulinSensitivityFactor: user.insulinSensitivityFactor,
             enabledNotice: user.enabledNotice
          };
 }
@@ -52,11 +54,14 @@ exports.userUpdate = function(req, res) {
     user.displayName = user.firstName + ' ' + user.lastName;
   }
 
-  if (req.body.desiredBloodGlucose !== undefined) user.desiredBloodGlucose = req.body.desiredBloodGlucose;
-  if (req.body.minBloodGlucose !== undefined) user.minBloodGlucose = req.body.minBloodGlucose;
-  if (req.body.maxBloodGlucose !== undefined) user.maxBloodGlucose = req.body.maxBloodGlucose;
-  if (req.body.ratioCarbohydRateGlucose !== undefined) user.ratioCarbohydRateGlucose = req.body.ratioCarbohydRateGlucose;
-  if (req.body.sensitivityToInsuline !== undefined) user.sensitivityToInsuline = req.body.sensitivityToInsuline;
+  if (req.body.diabetesType !== undefined) user.diabetesType = req.body.diabetesType;
+  if (req.body.dailyInsulinDosage !== undefined) user.dailyInsulinDosage = req.body.dailyInsulinDosage;
+
+  if (req.body.bloodSugarEtalon !== undefined) user.bloodSugarEtalon = req.body.bloodSugarEtalon;
+  if (req.body.lowBloodSugarLevel !== undefined) user.lowBloodSugarLevel = req.body.lowBloodSugarLevel;
+  if (req.body.highBloodSugarLevel !== undefined) user.highBloodSugarLevel = req.body.highBloodSugarLevel;
+  if (req.body.insulinToCarbRatio !== undefined) user.insulinToCarbRatio = req.body.insulinToCarbRatio;
+  if (req.body.insulinSensitivityFactor !== undefined) user.insulinSensitivityFactor = req.body.insulinSensitivityFactor;
   if (req.body.enabledNotice !== undefined) user.enabledNotice = req.body.enabledNotice;
 
   // Then save the user

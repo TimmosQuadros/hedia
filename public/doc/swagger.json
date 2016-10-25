@@ -357,27 +357,37 @@
                     "type": "string",
                     "description": "Password"
                 },
-                "desiredBloodGlucose": {
+                "diabetesType": {
+                    "type": "integer",
+                    "default": 1,
+                    "description": "Diabets type 1 or 2 values"
+                },
+                "dailyInsulinDosage": {
+                    "type": "integer",
+                    "default": 0,
+                    "description": "Daily Insulin Dosage"
+                },
+                "bloodSugarEtalon": {
                     "type": "integer",
                     "default": 0,
                     "description": "The desired blood glucose"
                 },
-                "minBloodGlucose": {
+                "lowBloodSugarLevel": {
                     "type": "integer",
                     "default": 0,
                     "description": "Min blood glucose"
                 },
-                "maxBloodGlucose": {
+                "highBloodSugarLevel": {
                     "type": "integer",
                     "default": 0,
                     "description": "Max blood glucose"
                 },
-                "ratioCarbohydRateGlucose": {
+                "insulinToCarbRatio": {
                     "type": "number",
                     "default": 0,
                     "description": "Rate carbohydrates from glucose"
                 },
-                "sensitivityToInsuline": {
+                "insulinSensitivityFactor": {
                     "type": "integer",
                     "default": 0,
                     "description": "Sensitivity to insuline"
@@ -419,27 +429,37 @@
                     "type": "string",
                     "description": "Avatar image Url"
                 },
-                "desiredBloodGlucose": {
+                "diabetesType": {
+                    "type": "integer",
+                    "default": 1,
+                    "description": "Diabets type 1 or 2 values"
+                },
+                "dailyInsulinDosage": {
+                    "type": "integer",
+                    "default": 0,
+                    "description": "Daily Insulin Dosage"
+                },
+                "bloodSugarEtalon": {
                     "type": "integer",
                     "default": 0,
                     "description": "The desired blood glucose"
                 },
-                "minBloodGlucose": {
+                "lowBloodSugarLevel": {
                     "type": "integer",
                     "default": 0,
                     "description": "Min blood glucose"
                 },
-                "maxBloodGlucose": {
+                "highBloodSugarLevel": {
                     "type": "integer",
                     "default": 0,
                     "description": "Max blood glucose"
                 },
-                "ratioCarbohydRateGlucose": {
+                "insulinToCarbRatio": {
                     "type": "number",
                     "default": 0,
                     "description": "Rate carbohydrates from glucose"
                 },
-                "sensitivityToInsuline": {
+                "insulinSensitivityFactor": {
                     "type": "integer",
                     "default": 0,
                     "description": "Sensitivity to insuline"

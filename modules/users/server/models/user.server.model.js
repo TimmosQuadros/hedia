@@ -21,7 +21,12 @@ owasp.config(config.shared.owasp);
 var validateLocalStrategyProperty = function (property) {
   return ((this.provider !== 'local' && !this.updated) || property.length);
 };
-
+/**
+ * A validation Diabets type 1 -2
+ */
+var validateDiabetsType = function(property){
+   return [1, 2].indexOf(property) > -1;
+};
 /**
  * A Validation function for local strategy email
  */
@@ -78,19 +83,27 @@ var UserSchema = new Schema({
     default: '',
     validate: [validateLocalStrategyEmail, 'Please fill a valid email address']
   },
-  desiredBloodGlucose: {
+  diabetesType: {
+    type: Number,
+    default: 1,
+    validate: [validateDiabetsType, 'Invalid diabets type value 1 or 2']
+    },
+  dailyInsulinDosage: {
+      type: Number,
+      default: 0},
+  bloodSugarEtalon: {
     type: Number,
     default: 0},
-  minBloodGlucose: {
+  lowBloodSugarLevel: {
     type: Number,
     default: 0},
-  maxBloodGlucose: {
+  highBloodSugarLevel: {
     type: Number,
     default: 0},
-  ratioCarbohydRateGlucose: {
+  insulinToCarbRatio: {
     type: Number,
     default: 0.0},
-  sensitivityToInsuline: {
+  insulinSensitivityFactor: {
     type: Number,
     default: 0.0},
   enabledNotice: {

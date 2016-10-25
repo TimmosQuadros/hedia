@@ -276,9 +276,6 @@
                 "produces": [
                     "multipart/form-data"
                 ],
-                "consumes": [
-                    "multipart/form-data"
-                ],
                 "parameters": [
                     {
                         "name": "newProfilePicture",

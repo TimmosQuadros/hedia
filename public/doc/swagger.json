@@ -269,6 +269,48 @@
                     }
                 }
             }
+        },
+        "/avatar-upload": {
+            "post": {
+                "summary": "Upload avatar file",
+                "produces": [
+                    "multipart/form-data"
+                ],
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "parameters": [
+                    {
+                        "name": "newProfilePicture",
+                        "description": "Image file",
+                        "required": true,
+                        "in": "formData",
+                        "type": "file"
+                    }
+                ],
+                "security": [
+                    {
+                        "auth_token": []
+                    }
+                ],
+                "tags": [
+                    "Avatar upload"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "File uploaded successfuly.",
+                        "schema": {
+                            "$ref": "#/definitions/SuccessAvatarUploadData"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -384,7 +426,10 @@
                     "type": "string",
                     "description": "Email for user recovery password"
                 }
-            }
+            },
+            "required": [
+                "email"
+            ]
         },
         "RecoveryPasswordObject": {
             "type": "object",
@@ -397,7 +442,11 @@
                     "type": "string",
                     "description": "New password"
                 }
-            }
+            },
+            "required": [
+                "token",
+                "newPassword"
+            ]
         },
         "ChangePasswordObject": {
             "type": "object",
@@ -409,6 +458,22 @@
                 "newPassword": {
                     "type": "string",
                     "description": "New password"
+                }
+            },
+            "required": [
+                "currentPassword",
+                "newPassword"
+            ]
+        },
+        "SuccessAvatarUploadData": {
+            "type": "object",
+            "properties": {
+                "success": {
+                    "type": "boolean",
+                    "description": "Return true"
+                },
+                "image_url": {
+                    "type": "string"
                 }
             }
         }

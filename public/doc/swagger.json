@@ -14,6 +14,9 @@
     "produces": [
         "application/json"
     ],
+    "consumes": [
+        "application/json"
+    ],
     "paths": {
         "/register-user": {
             "post": {
@@ -273,7 +276,7 @@
         "/avatar-upload": {
             "post": {
                 "summary": "Upload avatar file",
-                "produces": [
+                "consumes": [
                     "multipart/form-data"
                 ],
                 "parameters": [

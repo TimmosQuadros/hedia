@@ -16,7 +16,13 @@ var safeUserObject = function(user){
             profileImageURL: user.profileImageURL,
             email: validator.escape(user.email),
             lastName: validator.escape(user.lastName),
-            firstName: validator.escape(user.firstName)
+            firstName: validator.escape(user.firstName),
+            desiredBloodGlucose: user.desiredBloodGlucose,
+            minBloodGlucose: user.minBloodGlucose,
+            maxBloodGlucose: user.maxBloodGlucose,
+            ratioCarbohydRateGlucose: user.ratioCarbohydRateGlucose,
+            sensitivityToInsuline: user.sensitivityToInsuline,
+            enabledNotice: user.enabledNotice
          };
 }
 
@@ -34,17 +40,24 @@ exports.userUpdate = function(req, res) {
 
   // Init user and add missing fields
   var user = req.user;
-  if (req.body.firstName) user.firstName = req.body.firstName;
-  if (req.body.lastName) user.lastName = req.body.lastName;
-  if (req.body.email)
+  if (req.body.firstName !== undefined) user.firstName = req.body.firstName;
+  if (req.body.lastName !== undefined) user.lastName = req.body.lastName;
+  if (req.body.email !== undefined)
   {
      user.email = req.body.email;
      user.username = req.body.username || req.body.email;
   }
-  if (req.body.firstName || req.body.lastName)
+  if (req.body.firstName !== undefined || req.body.lastName !== undefined)
   {
     user.displayName = user.firstName + ' ' + user.lastName;
   }
+
+  if (req.body.desiredBloodGlucose !== undefined) user.desiredBloodGlucose = req.body.desiredBloodGlucose;
+  if (req.body.minBloodGlucose !== undefined) user.minBloodGlucose = req.body.minBloodGlucose;
+  if (req.body.maxBloodGlucose !== undefined) user.maxBloodGlucose = req.body.maxBloodGlucose;
+  if (req.body.ratioCarbohydRateGlucose !== undefined) user.ratioCarbohydRateGlucose = req.body.ratioCarbohydRateGlucose;
+  if (req.body.sensitivityToInsuline !== undefined) user.sensitivityToInsuline = req.body.sensitivityToInsuline;
+  if (req.body.enabledNotice !== undefined) user.enabledNotice = req.body.enabledNotice;
 
   // Then save the user
   user.save(function (err) {

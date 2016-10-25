@@ -78,6 +78,24 @@ var UserSchema = new Schema({
     default: '',
     validate: [validateLocalStrategyEmail, 'Please fill a valid email address']
   },
+  desiredBloodGlucose: {
+    type: Number,
+    default: 0},
+  minBloodGlucose: {
+    type: Number,
+    default: 0},
+  maxBloodGlucose: {
+    type: Number,
+    default: 0},
+  ratioCarbohydRateGlucose: {
+    type: Number,
+    default: 0.0},
+  sensitivityToInsuline: {
+    type: Number,
+    default: 0.0},
+  enabledNotice: {
+    type: Boolean,
+    default: true},
   username: {
     type: String,
     unique: 'Username already exists',

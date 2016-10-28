@@ -5,19 +5,21 @@
  */
 var apiController = require('../controllers/api.server.controller'),
     authServ = require('../services/auth.api.server.service'),
-    reqServ  = require('../services/check.request.server.service');
+    reqServ  = require('../services/check.request.server.service'),
+    fileBuilderService = require('../services/file.builder.api.server.service');
 
 module.exports = function(app) {
   // test api
-  app.route('/api/v1/foo').get(apiController.userFoo);
+  app.route('/api/v1/foo').get(apiController.userFoo)
+                          .post(fileBuilderService.fileBuilder, apiController.userFoo);
 
   // edit current profile
-  app.route('/api/v1/update-user').post([reqServ.checkJsonHeader, authServ.authByToken], apiController.userUpdate);
+  app.route('/api/v1/update-user').post([reqServ.checkJsonHeader, authServ.authByToken, fileBuilderService.fileBuilder], apiController.userUpdate);
   app.route('/api/v1/get-user').get(authServ.authByToken, apiController.userProfile);
   app.route('/api/v1/password-change').post(authServ.authByToken, apiController.changePassword);
 
   // auth APIs
-  app.route('/api/v1/register-user').post(reqServ.checkJsonHeader, apiController.userRegister);
+  app.route('/api/v1/register-user').post([reqServ.checkJsonHeader, fileBuilderService.fileBuilder], apiController.userRegister);
   app.route('/api/v1/login').post(reqServ.checkJsonHeader, apiController.login);
   app.route('/api/v1/logout').delete(authServ.authByToken, apiController.logout);
 

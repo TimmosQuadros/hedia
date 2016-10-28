@@ -64,6 +64,11 @@ exports.userUpdate = function(req, res) {
   if (req.body.insulinSensitivityFactor !== undefined) user.insulinSensitivityFactor = req.body.insulinSensitivityFactor;
   if (req.body.enabledNotice !== undefined) user.enabledNotice = req.body.enabledNotice;
 
+  if (req.buildFileUrl !== undefined)
+  {
+      user.profileImageURL = req.buildFileUrl;
+  }
+
   // Then save the user
   user.save(function (err) {
     if (err) {

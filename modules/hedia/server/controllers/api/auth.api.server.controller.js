@@ -21,6 +21,11 @@ exports.userRegister = function(req, res) {
   user.displayName = user.firstName + ' ' + user.lastName;
   if (user.username ===  undefined ) user.username = user.email;
 
+  if (req.buildFileUrl !== undefined)
+  {
+    user.profileImageURL = req.buildFileUrl;
+  }
+
   // Then save the user
   user.save(function (err) {
     if (err) {

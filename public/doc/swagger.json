@@ -155,7 +155,7 @@
                         "required": true,
                         "in": "body",
                         "schema": {
-                            "$ref": "#/definitions/UserProfileObject"
+                            "$ref": "#/definitions/UpdateUserObject"
                         }
                     }
                 ],
@@ -397,6 +397,10 @@
                     "default": true,
                     "description": "Enabled push notice"
                 },
+                "photo": {
+                    "type": "string",
+                    "description": "Photo in base64 string"
+                },
                 "provider": {
                     "type": "string",
                     "default": "local",
@@ -409,6 +413,71 @@
                 "email",
                 "password"
             ]
+        },
+        "UpdateUserObject": {
+            "type": "object",
+            "properties": {
+                "firstName": {
+                    "type": "string",
+                    "description": "First name"
+                },
+                "lastName": {
+                    "type": "string",
+                    "description": "Last name"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Email"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "Password"
+                },
+                "diabetesType": {
+                    "type": "integer",
+                    "default": 1,
+                    "description": "Diabets type 1 or 2 values"
+                },
+                "dailyInsulinDosage": {
+                    "type": "integer",
+                    "default": 0,
+                    "description": "Daily Insulin Dosage"
+                },
+                "bloodSugarEtalon": {
+                    "type": "integer",
+                    "default": 0,
+                    "description": "The desired blood glucose"
+                },
+                "lowBloodSugarLevel": {
+                    "type": "integer",
+                    "default": 0,
+                    "description": "Min blood glucose"
+                },
+                "highBloodSugarLevel": {
+                    "type": "integer",
+                    "default": 0,
+                    "description": "Max blood glucose"
+                },
+                "insulinToCarbRatio": {
+                    "type": "number",
+                    "default": 0,
+                    "description": "Rate carbohydrates from glucose"
+                },
+                "insulinSensitivityFactor": {
+                    "type": "integer",
+                    "default": 0,
+                    "description": "Sensitivity to insuline"
+                },
+                "enabledNotice": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enabled push notice"
+                },
+                "photo": {
+                    "type": "string",
+                    "description": "Photo in base64 string"
+                }
+            }
         },
         "UserProfileObject": {
             "type": "object",

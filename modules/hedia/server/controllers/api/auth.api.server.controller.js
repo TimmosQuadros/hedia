@@ -93,8 +93,6 @@ exports.loginByFBToken = function(req, res){
       res.jsonp({success: false, message: 'Invalid login or password'});
     }
   });
-
-  res.jsonp({success: true});
 };
 
 exports._buildToken = function(user, req, res){

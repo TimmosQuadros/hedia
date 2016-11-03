@@ -17,17 +17,7 @@ exports.userRegister = function(req, res) {
 
   // Init user and add missing fields
   var user = new User(req.body);
-  if (user.provider === undefined) {
-    user.provider = 'local';
-  }
-  else {
-    if (user.providerData === undefined || user.providerData.id === undefined)
-    {
-      return res.send({success: false,
-        message: 'Missing providerData for facebook'
-      });
-    }
-  }
+  user.provider = 'local'
 
   user.displayName = user.firstName + ' ' + user.lastName;
   if (user.username ===  undefined ) user.username = user.email;
@@ -75,17 +65,24 @@ exports.logout = function(req, res){
 };
 
 exports.loginByFBToken = function(req, res){
-  User.findOne({'providerData.id': req.providerData.id, provider: 'facebook'}).exec(function(err, user){
-    if (!err && user)
+  User.findOne({'providerData.id': req.facebookUserProfile.providerData.id, provider: 'facebook'}).exec(function(err, user){
+    if (!err)
     {
-      user.providerData.id = req.providerData.id;
-      user.providerData.accessToken = req.providerData.accessToken;
-      user.save(function (err) {
+      var fbUser = user;
+      if (fbUser)
+      {
+        fbUser.providerData = req.facebookUserProfile.providerData;
+      }
+      else {
+        fbUser = new User(req.facebookUserProfile);
+      }
+
+      fbUser.save(function (err) {
         if (err) {
           res.jsonp({success: false, message: err});
         }
         else {
-          exports._buildToken(user, req, res);
+          exports._buildToken(fbUser, req, res);
         }
       });
     }

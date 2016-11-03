@@ -32,10 +32,10 @@ exports.authByToken = function (req, res, next) {
 };
 
 exports.checkFBToken = function (req, res, next) {
-  var accessToken = req.body.access_token || req.query.access_token;
+  var accessToken = req.body.access_token;
   if (accessToken === undefined)
   {
-    return res.send({success: false, message: 'Invalid access token'});
+     return res.send({success: false, message: 'Invalid access token'});
   }
   else
   {
@@ -51,8 +51,21 @@ exports.checkFBToken = function (req, res, next) {
                       return res.send({success: false, message: 'Invalid access token'});
                     }
                     else {
-                      req.providerData = parsedData;
-                      req.providerData.accessToken = accessToken;
+                      var facebookUserProfile = {
+                        firstName: req.body.firstName,
+                        lastName: req.body.lastName,
+                        displayName: req.body.firstName + ' ' + req.body.lastName,
+                        email: req.body.email,
+                        username: req.body.email,
+                        profileImageURL: '//graph.facebook.com/' + parsedData.id + '/picture?type=large',
+                        provider: 'facebook',
+                        providerData: parsedData
+                      };
+
+                      facebookUserProfile.providerData.accessToken = accessToken;
+                      facebookUserProfile.providerData.firstName = req.body.firstName;
+                      facebookUserProfile.providerData.lastName = req.body.lastName;
+                      req.facebookUserProfile = facebookUserProfile;
                       next();
                     }
                  } catch (e) {

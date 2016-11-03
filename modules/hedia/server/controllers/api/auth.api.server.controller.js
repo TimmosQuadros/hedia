@@ -17,7 +17,18 @@ exports.userRegister = function(req, res) {
 
   // Init user and add missing fields
   var user = new User(req.body);
-  if (user.provider === undefined) user.provider = 'local';
+  if (user.provider === undefined) {
+    user.provider = 'local';
+  }
+  else {
+    if (user.providerData === undefined || user.providerData.id === undefined)
+    {
+      return res.send({success: false,
+        message: 'Missing providerData for facebook'
+      });
+    }
+  }
+
   user.displayName = user.firstName + ' ' + user.lastName;
   if (user.username ===  undefined ) user.username = user.email;
 
@@ -42,7 +53,7 @@ exports.userRegister = function(req, res) {
 };
 
 exports.login = function(req, res){
-  User.findOne({username: req.body.email}).exec(function(err, user){
+  User.findOne({username: req.body.email, provider: 'facebook'}).exec(function(err, user){
     if (!err && user && user.authenticate(req.body.password))
     {
        exports._buildToken(user, req, res);
@@ -61,6 +72,29 @@ exports.logout = function(req, res){
       res.jsonp({success: false,  message: errorHandler.getErrorMessage(err)});
     }
   });
+};
+
+exports.loginByFBToken = function(req, res){
+  User.findOne({'providerData.id': req.providerData.id}).exec(function(err, user){
+    if (!err && user)
+    {
+      user.providerData.id = req.providerData.id;
+      user.providerData.accessToken = req.providerData.accessToken;
+      user.save(function (err) {
+        if (err) {
+          res.jsonp({success: false, message: err});
+        }
+        else {
+          exports._buildToken(user, req, res);
+        }
+      });
+    }
+    else {
+      res.jsonp({success: false, message: 'Invalid login or password'});
+    }
+  });
+
+  res.jsonp({success: true});
 };
 
 exports._buildToken = function(user, req, res){

@@ -20,7 +20,9 @@ module.exports = function(app) {
 
   // auth APIs
   app.route('/api/v1/register-user').post([reqServ.checkJsonHeader, fileBuilderService.fileBuilder], apiController.userRegister);
+
   app.route('/api/v1/login').post(reqServ.checkJsonHeader, apiController.login);
+  app.route('/api/v1/login-fb-token').post([reqServ.checkJsonHeader, authServ.checkFBToken], apiController.loginByFBToken);
   app.route('/api/v1/logout').delete(authServ.authByToken, apiController.logout);
 
   // passwords APIs

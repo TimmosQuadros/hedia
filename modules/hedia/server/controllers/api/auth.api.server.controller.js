@@ -53,7 +53,7 @@ exports.userRegister = function(req, res) {
 };
 
 exports.login = function(req, res){
-  User.findOne({username: req.body.email, provider: 'facebook'}).exec(function(err, user){
+  User.findOne({username: req.body.email}).exec(function(err, user){
     if (!err && user && user.authenticate(req.body.password))
     {
        exports._buildToken(user, req, res);
@@ -75,7 +75,7 @@ exports.logout = function(req, res){
 };
 
 exports.loginByFBToken = function(req, res){
-  User.findOne({'providerData.id': req.providerData.id}).exec(function(err, user){
+  User.findOne({'providerData.id': req.providerData.id, provider: 'facebook'}).exec(function(err, user){
     if (!err && user)
     {
       user.providerData.id = req.providerData.id;
@@ -90,7 +90,7 @@ exports.loginByFBToken = function(req, res){
       });
     }
     else {
-      res.jsonp({success: false, message: 'Invalid login or password'});
+      res.jsonp({success: false, message: 'Invalid token '});
     }
   });
 };

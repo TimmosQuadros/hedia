@@ -356,6 +356,94 @@
                     }
                 }
             }
+        },
+        "/post-history": {
+            "post": {
+                "summary": "Post history log",
+                "security": [
+                    {
+                        "auth_token": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "description": "User object",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/HistoryLogObject"
+                        }
+                    }
+                ],
+                "tags": [
+                    "Post history log object"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "If sucecss return History log object",
+                        "schema": {
+                            "$ref": "#/definitions/SuccessHistoryLogObject"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/get-histories": {
+            "get": {
+                "summary": "Get histories",
+                "security": [
+                    {
+                        "auth_token": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "dates",
+                        "description": "Search by dates format (dd-mm-yyyy) (example ?dates=28-12-203 or ?dates=12-01-2013,23-01-2013,14-10-2013)",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "from",
+                        "description": "Date from  format (dd-mm-yyyy) )",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    },
+                    {
+                        "name": "to",
+                        "description": "Date from  format (dd-mm-yyyy) )",
+                        "in": "query",
+                        "type": "string",
+                        "required": false
+                    }
+                ],
+                "tags": [
+                    "Get history logs"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "If sucecss return History logs objects",
+                        "schema": {
+                            "$ref": "#/definitions/SuccessHistoryLogObjects"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -391,27 +479,37 @@
                     "type": "string",
                     "description": "Password"
                 },
-                "desiredBloodGlucose": {
+                "diabetesType": {
+                    "type": "integer",
+                    "default": 0,
+                    "description": "Diabet types 1 or 2"
+                },
+                "dailyInsulinDosage": {
+                    "type": "integer",
+                    "default": 0,
+                    "description": "daily Insulin Dosage"
+                },
+                "bloodSugarEtalon": {
                     "type": "integer",
                     "default": 0,
                     "description": "The desired blood glucose"
                 },
-                "minBloodGlucose": {
+                "lowBloodSugarLevel": {
                     "type": "integer",
                     "default": 0,
                     "description": "Min blood glucose"
                 },
-                "maxBloodGlucose": {
+                "highBloodSugarLevel": {
                     "type": "integer",
                     "default": 0,
                     "description": "Max blood glucose"
                 },
-                "ratioCarbohydRateGlucose": {
+                "insulinToCarbRatio": {
                     "type": "number",
                     "default": 0,
                     "description": "Rate carbohydrates from glucose"
                 },
-                "sensitivityToInsuline": {
+                "insulinSensitivityFactor": {
                     "type": "integer",
                     "default": 0,
                     "description": "Sensitivity to insuline"
@@ -448,27 +546,37 @@
                     "type": "string",
                     "description": "Avatar image Url"
                 },
-                "desiredBloodGlucose": {
+                "diabetesType": {
+                    "type": "integer",
+                    "default": 0,
+                    "description": "Diabet types 1 or 2"
+                },
+                "dailyInsulinDosage": {
+                    "type": "integer",
+                    "default": 0,
+                    "description": "daily Insulin Dosage"
+                },
+                "bloodSugarEtalon": {
                     "type": "integer",
                     "default": 0,
                     "description": "The desired blood glucose"
                 },
-                "minBloodGlucose": {
+                "lowBloodSugarLevel": {
                     "type": "integer",
                     "default": 0,
                     "description": "Min blood glucose"
                 },
-                "maxBloodGlucose": {
+                "highBloodSugarLevel": {
                     "type": "integer",
                     "default": 0,
                     "description": "Max blood glucose"
                 },
-                "ratioCarbohydRateGlucose": {
+                "insulinToCarbRatio": {
                     "type": "number",
                     "default": 0,
                     "description": "Rate carbohydrates from glucose"
                 },
-                "sensitivityToInsuline": {
+                "insulinSensitivityFactor": {
                     "type": "integer",
                     "default": 0,
                     "description": "Sensitivity to insuline"
@@ -517,7 +625,6 @@
                 }
             },
             "required": [
-                "email",
                 "firstName",
                 "lastName",
                 "access_token"
@@ -612,6 +719,67 @@
                 },
                 "user": {
                     "$ref": "#/definitions/UserProfileObject"
+                }
+            }
+        },
+        "HistoryLogObject": {
+            "type": "object",
+            "properties": {
+                "bloodGlucose": {
+                    "type": "number",
+                    "description": "bloodGlucose"
+                },
+                "foodGramms": {
+                    "type": "number"
+                },
+                "exercises": {
+                    "type": "number"
+                },
+                "insulineDosage": {
+                    "type": "number"
+                },
+                "date": {
+                    "type": "string",
+                    "description": "Date format dd-mm-yyyy"
+                },
+                "time": {
+                    "type": "string",
+                    "description": "Time format hh:MM"
+                }
+            },
+            "required": [
+                "bloodGlucose",
+                "foodGramms",
+                "exercises",
+                "insulineDosage",
+                "date",
+                "time"
+            ]
+        },
+        "SuccessHistoryLogObject": {
+            "type": "object",
+            "properties": {
+                "success": {
+                    "type": "boolean",
+                    "description": "Return true"
+                },
+                "history": {
+                    "$ref": "#/definitions/HistoryLogObject"
+                }
+            }
+        },
+        "SuccessHistoryLogObjects": {
+            "type": "object",
+            "properties": {
+                "success": {
+                    "type": "boolean",
+                    "description": "Return true"
+                },
+                "histories": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/HistoryLogObject"
+                    }
                 }
             }
         }

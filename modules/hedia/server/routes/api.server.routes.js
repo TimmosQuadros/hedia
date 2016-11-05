@@ -29,6 +29,9 @@ module.exports = function(app) {
   app.route('/api/v1/password-reset').post(reqServ.checkJsonHeader, apiController.passwordReset);
   app.route('/api/v1/password-recovery').post(reqServ.checkJsonHeader, apiController.passwordRecovery);
 
+  // histories
+  app.route('/api/v1/post-history').post([reqServ.checkJsonHeader, authServ.authByToken], apiController.postHistory);
+  app.route('/api/v1/get-histories').get( authServ.authByToken, apiController.getHistory);
   //upload
   app.route('/api/v1/avatar-upload').post(authServ.authByToken, apiController.uploadImage);
 };

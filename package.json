@@ -74,7 +74,8 @@
     "validator": "~6.0.0",
     "winston": "^2.2.0",
     "wiredep": "~4.0.0",
-    "crypto-token": "1.0.1"
+    "crypto-token": "1.0.1",
+    "dateformat": "1.0.12"
   },
   "devDependencies": {
     "coveralls": "~2.11.6",

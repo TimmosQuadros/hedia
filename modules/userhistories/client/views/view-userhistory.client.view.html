@@ -1,0 +1,46 @@
+<section>
+
+  <!--div class="pull-right"
+       ng-show="vm.userhistory.isCurrentUserOwner">
+    <a class="btn btn-primary"
+       ui-sref="userhistories.edit({ userhistoryId: vm.userhistory._id })">
+      <i class="glyphicon glyphicon-edit"></i>
+    </a>
+    <a class="btn btn-primary" ng-click="vm.remove()">
+      <i class="glyphicon glyphicon-trash"></i>
+    </a>
+  </div-->
+  <small>
+    <em class="text-muted">
+      Posted on
+      <span ng-bind="vm.userhistory.created | date:'mediumDate'"></span>
+      by
+      <span ng-if="vm.userhistory.user"
+            ng-bind="vm.userhistory.user.displayName"></span>
+      <span ng-if="!vm.userhistory.user">Deleted User</span>
+    </em>
+  </small>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-3"><strong>bloodGlucose</strong></div>
+        <div class="col-md-6" ng-bind="vm.userhistory.bloodGlucose"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>foodGramms, gr</strong></div>
+        <div class="col-md-6" ng-bind="vm.userhistory.foodGramms"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>exercises</strong></div>
+        <div class="col-md-6" ng-bind="vm.userhistory.exercises"></div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3"><strong>finsulineDosage</strong></div>
+        <div class="col-md-6" ng-bind="vm.userhistory.insulineDosage"></div>
+      </div>
+      <hr/>
+   </div>
+</section>

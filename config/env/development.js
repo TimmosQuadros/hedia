@@ -4,7 +4,7 @@ var defaultEnvConfig = require('./default');
 
 module.exports = {
   db: {
-    uri: process.env.MONGOHQ_URL || process.env.MONGODB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || '192.168.1.2') + '/hedia',
+    uri: process.env.MONGOHQ_URL || process.env.MONGODB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/hedia-dev',
     options: {
       user: '',
       pass: ''
@@ -71,7 +71,7 @@ module.exports = {
         pass: process.env.MAILER_PASSWORD || 'MAILER_PASSWORD'
       }
     }  },
-  livereload: true,
+  livereload: false,
   seedDB: {
     seed: process.env.MONGO_SEED === 'true',
     options: {

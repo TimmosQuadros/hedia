@@ -1,0 +1,59 @@
+<section>
+  <div class="page-header">
+    <h1>{{vm.userhistory._id ? 'Edit Userhistory' : 'New Userhistory'}}</h1>
+  </div>
+  <div class="col-md-12">
+    <form name="vm.form.userhistoryForm" class="form-horizontal" ng-submit="vm.save(vm.form.userhistoryForm.$valid)" novalidate>
+      <fieldset>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="bloodGlucose">Blood Glucose</label>
+          <input name="bloodGlucose" type="number" ng-model="vm.userhistory.bloodGlucose" id="bloodGlucose" class="form-control" placeholder="Blood Glucose" required>
+          <div ng-messages="vm.form.userhistoryForm.bloodGlucose.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Blood Glucose is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="foodGramms">Food Gramms</label>
+          <input name="foodGramms" type="number" ng-model="vm.userhistory.foodGramms" id="foodGramms" class="form-control" placeholder="Food Gramms" required>
+          <div ng-messages="vm.form.userhistoryForm.foodGramms.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Food Gramms is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="exercises">Exercises</label>
+          <input name="exercises" type="number" ng-model="vm.userhistory.exercises" id="exercises" class="form-control" placeholder="Exercises" required>
+          <div ng-messages="vm.form.userhistoryForm.exercises.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Exercises is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="insulineDosage">Insuline Dosage</label>
+          <input name="insulineDosage" type="number" ng-model="vm.userhistory.insulineDosage" id="insulineDosage" class="form-control" placeholder="Insuline Dosage" required>
+          <div ng-messages="vm.form.userhistoryForm.insulineDosage.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Insuline Dosage is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="insulineDosage">Date</label>
+          <input name="date" type="date" ng-model="vm.userhistory.date" id="date" class="form-control" placeholder="date" required>
+          <div ng-messages="vm.form.userhistoryForm.date.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Date is required.</p>
+          </div>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="insulineDosage">Time</label>
+          <input name="time" type="time" ng-model="vm.userhistory.time" id="time" class="form-control" placeholder="itime" required>
+          <div ng-messages="vm.form.userhistoryForm.time.$error" role="alert">
+            <p class="help-block error-text" ng-message="required">Time is required.</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-default">{{vm.userhistory._id ? 'Update' : 'Create'}}</button>
+        </div>
+        <div ng-show="vm.error" class="text-danger">
+          <strong ng-bind="vm.error"></strong>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

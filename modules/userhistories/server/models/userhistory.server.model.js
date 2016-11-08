@@ -75,6 +75,6 @@ UserhistorySchema.pre('save', function (next) {
   next();
 });
 
-UserhistorySchema.index({user: 1, fullTime: 1}, {unique: true});
+//UserhistorySchema.index({user: 1, fullTime: 1}, {unique: true});
 
 mongoose.model('Userhistory', UserhistorySchema);

@@ -14,6 +14,7 @@ var path = require('path'),
 var safeHistoryObject = function(history){
   return {
     _id: history._id,
+    changeStatus: history.changeStatus,
     bloodGlucose: history.bloodGlucose,
     foodGramms: history.foodGramms,
     exercises: history.exercises,

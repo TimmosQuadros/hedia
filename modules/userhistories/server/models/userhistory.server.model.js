@@ -19,6 +19,10 @@ var UserhistorySchema = new Schema({
     default: '',
     required: 'Please fill Blood Glucose',
     trim: true},
+  changeStatus: {
+    type: Number,
+    default: 1,
+    trim: true},
   foodGramms: {
     type: Number,
     default: '',

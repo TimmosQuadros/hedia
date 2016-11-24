@@ -765,7 +765,11 @@
                     "type": "string",
                     "description": "History log ID"
                 },
-                "bloodGlucose": {
+                "changeStatus": {
+                  "type": "number",
+                  "description": "changeStatus object default = 1 "
+                },
+               "bloodGlucose": {
                     "type": "number",
                     "description": "bloodGlucose"
                 },

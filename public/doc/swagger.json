@@ -406,7 +406,7 @@
                 "parameters": [
                     {
                         "name": "id",
-                        "description": "HOstory log id",
+                        "description": "History log id",
                         "required": true,
                         "type": "string",
                         "in": "path"

@@ -13,6 +13,7 @@ var path = require('path'),
 
 var safeHistoryObject = function(history){
   return {
+    _id: history._id,
     bloodGlucose: history.bloodGlucose,
     foodGramms: history.foodGramms,
     exercises: history.exercises,
@@ -40,6 +41,19 @@ exports.postHistory = function(req, res) {
   });
 };
 
+exports.deleteHistory = function(req, res) {
+  req.historylog.remove(function(err){
+    if (err) {
+        return res.send({success: false,
+            message: errorHandler.getErrorMessage(err)
+          });
+        } else {
+          res.jsonp({success: true});
+        }
+  });
+};
+
+
 exports.getHistory = function(req, res) {
   var condition = {user: req.user._id};
   if (req.query.dates !== undefined)
@@ -62,7 +76,7 @@ exports.getHistory = function(req, res) {
     delete condition.fullTime;
     delete condition.date;
   }
-  UserHistory.find(condition, "-fullTime -created -user -_id")
+  UserHistory.find(condition, "-fullTime -created -user")
              .sort('-created')
              .exec(function (err, userhistories){
                 if (err)
@@ -79,3 +93,24 @@ exports.getHistory = function(req, res) {
 
 
 
+exports.historyLogByID = function(req, res, next) {
+
+  var id = req.params.historyLogId;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).send({success: false,
+      message: 'History Log ID is invalid'
+    });
+  }
+
+  UserHistory.findOne({_id: id, user: req.user._id}).populate('user', 'displayName').exec(function (err, historylog) {
+    if (err) {
+      return next(err);
+    } else if (!historylog) {
+      return res.status(404).send({success: false,
+        message: 'No Log History with that identifier has been found'
+      });
+    }
+    req.historylog = historylog;
+    next();
+  });
+};

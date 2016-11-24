@@ -395,6 +395,42 @@
                 }
             }
         },
+        "/remove-history-log/{id}": {
+            "delete": {
+                "summary": "Remove history log",
+                "security": [
+                    {
+                        "auth_token": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "HOstory log id",
+                        "required": true,
+                        "type": "string",
+                        "in": "path"
+                    }
+                ],
+                "tags": [
+                    "Remove hostory log"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "If sucecss return true",
+                        "schema": {
+                            "$ref": "#/definitions/SuccessEmptyData"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
         "/get-histories": {
             "get": {
                 "summary": "Get histories",
@@ -725,6 +761,10 @@
         "HistoryLogObject": {
             "type": "object",
             "properties": {
+                "_id": {
+                    "type": "string",
+                    "description": "History log ID"
+                },
                 "bloodGlucose": {
                     "type": "number",
                     "description": "bloodGlucose"

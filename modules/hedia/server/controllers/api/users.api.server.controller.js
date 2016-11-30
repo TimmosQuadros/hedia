@@ -24,7 +24,9 @@ var safeUserObject = function(user){
             highBloodSugarLevel: user.highBloodSugarLevel,
             insulinToCarbRatio: user.insulinToCarbRatio,
             insulinSensitivityFactor: user.insulinSensitivityFactor,
-            enabledNotice: user.enabledNotice
+            enabledNotice: user.enabledNotice,
+            threeKStepPersent: user.threeKStepPersent,
+            sixKStepPersent: user.sixKStepPersent
          };
 }
 
@@ -68,6 +70,9 @@ exports.userUpdate = function(req, res) {
   {
       user.profileImageURL = req.buildFileUrl;
   }
+
+  if (req.body.threeKStepPersent !== undefined) user.threeKStepPersent = req.body.threeKStepPersent;
+  if (req.body.sixKStepPersent !== undefined) user.sixKStepPersent = req.body.sixKStepPersent;
 
   // Then save the user
   user.save(function (err) {

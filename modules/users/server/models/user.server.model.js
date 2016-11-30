@@ -96,10 +96,10 @@ var UserSchema = new Schema({
     default: 0},
   lowBloodSugarLevel: {
     type: Number,
-    default: 0},
+    default: 0.0},
   highBloodSugarLevel: {
     type: Number,
-    default: 0},
+    default: 0.0},
   insulinToCarbRatio: {
     type: Number,
     default: 0.0},
@@ -109,6 +109,12 @@ var UserSchema = new Schema({
   enabledNotice: {
     type: Boolean,
     default: true},
+  threeKStepPersent:{
+    type: Number,
+    default: 0},
+  sixKStepPersent:{
+    type: Number,
+    default: 0},
   username: {
     type: String,
     unique: 'Username already exists',

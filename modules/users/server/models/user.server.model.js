@@ -115,6 +115,12 @@ var UserSchema = new Schema({
   sixKStepPersent:{
     type: Number,
     default: 0},
+  timeForAction:{
+    type: Number,
+    default: 0},
+  glucoseIncrease :{
+    type: Number,
+    default: 0},
   username: {
     type: String,
     unique: 'Username already exists',

@@ -26,7 +26,9 @@ var safeUserObject = function(user){
             insulinSensitivityFactor: user.insulinSensitivityFactor,
             enabledNotice: user.enabledNotice,
             threeKStepPersent: user.threeKStepPersent,
-            sixKStepPersent: user.sixKStepPersent
+            sixKStepPersent: user.sixKStepPersent,
+            timeForAction: user.timeForAction,
+            glucoseIncrease: user.glucoseIncrease
          };
 }
 
@@ -65,6 +67,9 @@ exports.userUpdate = function(req, res) {
   if (req.body.insulinToCarbRatio !== undefined) user.insulinToCarbRatio = req.body.insulinToCarbRatio;
   if (req.body.insulinSensitivityFactor !== undefined) user.insulinSensitivityFactor = req.body.insulinSensitivityFactor;
   if (req.body.enabledNotice !== undefined) user.enabledNotice = req.body.enabledNotice;
+
+  if (req.body.timeForAction !== undefined) user.timeForAction = req.body.timeForAction;
+  if (req.body.glucoseIncrease !== undefined) user.glucoseIncrease = req.body.glucoseIncrease;
 
   if (req.buildFileUrl !== undefined)
   {

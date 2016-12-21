@@ -562,6 +562,14 @@
                 "sixKStepPersent": {
                     "type": "number",
                     "default": 0
+                },
+                "timeForAction": {
+                    "type": "number",
+                    "default": 0
+                },
+                "glucoseIncrease": {
+                    "type": "number",
+                    "default": 0
                 }
             },
             "required": [
@@ -635,6 +643,14 @@
                     "default": 0
                 },
                 "sixKStepPersent": {
+                    "type": "number",
+                    "default": 0
+                },
+                "timeForAction": {
+                    "type": "number",
+                    "default": 0
+                },
+                "glucoseIncrease": {
                     "type": "number",
                     "default": 0
                 }
@@ -782,10 +798,10 @@
                     "description": "History log ID"
                 },
                 "changeStatus": {
-                  "type": "number",
-                  "description": "changeStatus object default = 1 "
+                    "type": "number",
+                    "description": "changeStatus object default = 1 "
                 },
-               "bloodGlucose": {
+                "bloodGlucose": {
                     "type": "number",
                     "description": "bloodGlucose"
                 },

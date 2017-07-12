@@ -3,7 +3,7 @@
 /**
  * Module dependencies.
  */
-process.env.NODE_ENV = 'production';
+process.env.NODE_ENV = 'development';
 process.env.PORT = 3000;
 
 process.env.FACEBOOK_ID = '1705420716378030';

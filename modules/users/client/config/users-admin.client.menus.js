@@ -13,5 +13,9 @@
       title: 'Manage Users',
       state: 'admin.users'
     });
+    menuService.addSubMenuItem('topbar', 'admin', {
+      title: 'Send Newsletter',
+      state: 'admin.newsletter'
+    });
   }
 }());

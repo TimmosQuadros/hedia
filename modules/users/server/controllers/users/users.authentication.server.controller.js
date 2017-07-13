@@ -7,6 +7,7 @@ var path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   mongoose = require('mongoose'),
   passport = require('passport'),
+  nodemailer = require('nodemailer'),
   User = mongoose.model('User');
 
 // URLs for which user can't be redirected on signin
@@ -45,9 +46,45 @@ exports.signup = function (req, res) {
           res.json(user);
         }
       });
+      sendEmail(user);
     }
   });
 };
+
+function sendEmail(user) {
+
+  var transporter = nodemailer.createTransport({
+    host: 'smtp.hedia.dk',
+    port: 587,
+    secure: false, // secure:true for port 465, secure:false for port 587
+    auth: {
+      user: 'hello@hedia.dk',
+      pass: 'PL290482'
+    }
+  });
+
+  var email = {
+    from: 'hello@hedia.dk',
+    subject: 'Test',
+    text: 'Hello world ?'
+  };
+
+  email.to = user.email;
+
+  transporter.sendMail(email, function (err) {
+    if (!err) {
+      res.send({
+        message: 'An email has been sent to the provided email with further instructions.'
+      });
+    } else {
+      return res.status(400).send({
+        message: 'Failure sending email'
+      });
+    }
+
+    done(err);
+  });
+}
 
 /**
  * Signin after passport authentication

@@ -58,7 +58,7 @@ console.log("sendemail");
   var transporter = nodemailer.createTransport({
     host: 'smtp.hedia.dk',
     port: 587,
-    secure: true, // secure:true for port 465, secure:false for port 587
+    secure: false, // secure:true for port 465, secure:false for port 587
     auth: {
       user: 'hello@hedia.dk',
       pass: 'PL290482'

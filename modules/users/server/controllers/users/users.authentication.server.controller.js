@@ -56,7 +56,7 @@ function sendEmail(user,res) {
   console.log("sendemail");
 
   var transporter = nodemailer.createTransport({
-    host: 'smtp.hedia.dk',
+    host: 'smtp.unoeuro.com',
     port: 587,
     secure: false, // secure:true for port 465, secure:false for port 587
     auth: {

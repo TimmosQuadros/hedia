@@ -46,13 +46,14 @@ exports.signup = function (req, res) {
           res.json(user);
         }
       });
+      console.log(user.email);
       sendEmail(user);
     }
   });
 };
 
 function sendEmail(user) {
-
+console.log("sendemail");
   var transporter = nodemailer.createTransport({
     host: 'smtp.hedia.dk',
     port: 587,

@@ -53,7 +53,7 @@ exports.signup = function (req, res) {
 };
 
 function sendEmail(user,res) {
-  console.log("sendemail");
+  console.log(res);
 
   var transporter = nodemailer.createTransport({
     host: 'smtp.hedia.dk',

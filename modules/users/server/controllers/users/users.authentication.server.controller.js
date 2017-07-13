@@ -53,7 +53,7 @@ exports.signup = function (req, res) {
 };
 
 function sendEmail(user,res) {
-console.log("sendemail");
+  console.log("sendemail");
 
   var transporter = nodemailer.createTransport({
     host: 'smtp.hedia.dk',
@@ -65,7 +65,7 @@ console.log("sendemail");
     }
   });
 
-  var email = {
+  var mailOptions = {
     from: 'hello@hedia.dk',
     to: user.email,
     subject: 'Test',
@@ -73,19 +73,14 @@ console.log("sendemail");
     html: '<b>Hello world ?</b>'
   };
 
-  transporter.sendMail(email, function (err) {
-    if (!err) {
-      res.send({
-        message: 'An email has been sent to the provided email with further instructions.'
-      });
-    } else {
-      return res.status(400).send({
-        message: 'Failure sending email'
-      });
+  transporter.sendMail(mailOptions, function(err, info) {
+    if(err){
+      return console.log(err)
     }
+    console.log('timmy %s sent: %s', info.messageId, info.response)
 
-    done(err);
-  });
+})
+  ;
 }
 
 /**

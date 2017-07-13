@@ -46,7 +46,7 @@ exports.signup = function (req, res) {
           res.json(user);
         }
       });
-      console.log(req);
+      console.log(req.body);
       sendEmail(user,res);
     }
   });

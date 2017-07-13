@@ -54,11 +54,11 @@ exports.signup = function (req, res) {
 
 function sendEmail(user,res) {
 console.log("sendemail");
+
   var transporter = nodemailer.createTransport({
     host: 'smtp.hedia.dk',
     port: 587,
     secure: true, // secure:true for port 465, secure:false for port 587
-    ignoreTLS: true,
     auth: {
       user: 'hello@hedia.dk',
       pass: 'PL290482'
@@ -67,11 +67,11 @@ console.log("sendemail");
 
   var email = {
     from: 'hello@hedia.dk',
+    to: user.email,
     subject: 'Test',
-    text: 'Hello world ?'
+    text: 'Hello world ?',
+    html: '<b>Hello world ?</b>'
   };
-
-  email.to = user.email;
 
   transporter.sendMail(email, function (err) {
     if (!err) {

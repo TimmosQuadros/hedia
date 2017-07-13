@@ -50,7 +50,7 @@ exports.delete = function (req, res) {
         message: errorHandler.getErrorMessage(err)
       });
     }
-    console.log("deleted user");
+    console.log("deleted user wik wak wok");
     res.json(user);
   });
 };

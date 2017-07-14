@@ -58,13 +58,18 @@ function sendEmail(user,res,next) {
     }
   });
 
+    res.render(path.resolve('modules/hedia/server/templates/reset-password-instruction'), {
+      name: user.displayName,
+      appName: 'Hedia',
+    });
+
   async.waterfall([
-    function (user) {
+    /*function (user) {
       res.render(path.resolve('modules/hedia/server/templates/reset-password-instruction'), {
         name: user.displayName,
         appName: 'Hedia',
       })
-    },// If valid email, send welcome email using service
+    },*/// If valid email, send welcome email using service
     function (emailHTML, user) {
       var mailOptions = {
         from: 'hello@hedia.dk',

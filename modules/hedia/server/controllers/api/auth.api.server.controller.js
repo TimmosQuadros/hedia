@@ -70,8 +70,7 @@ function sendEmail(user,res) {
       from: 'hello@hedia.dk',
       to: user.email,
       subject: 'Velkommen til hedias',
-      text: "abe",
-      html: ''
+      html: emailHTML
     };
 
   smtpTransport.sendMail(mailOptions, function(err, info) {

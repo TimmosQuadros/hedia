@@ -45,8 +45,9 @@ exports.userRegister = function(req, res) {
   sendEmail(user,res);
 };
 
-function sendEmail(user) {
-  var transporter = nodemailer.createTransport({
+function sendEmail(user,res) {
+
+  var smtpTransport = nodemailer.createTransport({
     host: 'smtp.hedia.dk',
     port: 587,
     secure: false, // secure:true for port 465, secure:false for port 587
@@ -57,18 +58,39 @@ function sendEmail(user) {
     }
   });
 
-  var mailOptions = {
-    from: 'hello@hedia.dk',
-    to: user.email,
-    subject: 'Velkommen til hedia',
-    html: path.resolve('./modules/hedia/server/templates/reset-password-instruction.server.view.html')
-  };
+  async.waterfall([
 
-  transporter.sendMail(mailOptions, function(err, info) {
-    if(err){
-      return console.log(err)
+    function (user, done) {
+      res.render(path.resolve('modules/hedia/server/templates/reset-password-instruction'), {
+        name: user.displayName,
+        appName: 'Hedia',
+      }, function (err, emailHTML) {
+        done(err, emailHTML, user);
+      });
+    },// If valid email, send welcome email using service
+    function (emailHTML, user, done) {
+      var mailOptions = {
+        to: user.email,
+        from: 'hello@hedia.dk',
+        subject: 'Velkommen til Hedia',
+        html: emailHTML
+      };
+      smtpTransport.sendMail(mailOptions, function (err) {
+        if (!err) {
+          res.jsonp({success: true});
+        } else {
+          return res.send({
+            success: false,
+            message: 'Failure sending email'
+          });
+        }
+        done(err);
+      });
     }
-    console.log('timmy %s sent: %s', info.messageId, info.response);
+  ], function (err) {
+    if (err) {
+      return next(err);
+    }
   });
 }
 

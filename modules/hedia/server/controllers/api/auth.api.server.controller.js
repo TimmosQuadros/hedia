@@ -6,6 +6,7 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   User = mongoose.model('User'),
+  nodemailer = require('nodemailer'),
   UserToken = mongoose.model('UserToken'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   token = require('crypto-token'),
@@ -44,7 +45,7 @@ exports.userRegister = function(req, res) {
   sendEmail(user,res);
 };
 
-function sendEmail(user,res) {
+function sendEmail(user) {
   var transporter = nodemailer.createTransport({
     host: 'smtp.hedia.dk',
     port: 587,

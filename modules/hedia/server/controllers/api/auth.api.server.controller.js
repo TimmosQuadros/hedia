@@ -63,12 +63,14 @@ function sendEmail(user,res) {
     appName: 'Hedia',
   });
 
+  console.log(emailHTML);
+
     var mailOptions = {
       from: 'hello@hedia.dk',
       to: user.email,
-      subject: 'Velkommen til hedia',
+      subject: 'Velkommen til hedias',
       text: "abe",
-      html: emailHTML
+      html: ''
     };
 
   smtpTransport.sendMail(mailOptions, function(err, info) {

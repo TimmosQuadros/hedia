@@ -58,7 +58,7 @@ function sendEmail(user,res,next) {
     }
   });
 
-    res.render(path.resolve('modules/hedia/server/templates/reset-password-instruction'), {
+    var emailHTML = res.render(path.resolve('modules/hedia/server/templates/reset-password-instruction'), {
       name: user.displayName,
       appName: 'Hedia',
     });
@@ -70,7 +70,7 @@ function sendEmail(user,res,next) {
         appName: 'Hedia',
       })
     },*/// If valid email, send welcome email using service
-    function (emailHTML, user) {
+    function () {
       var mailOptions = {
         from: 'hello@hedia.dk',
         to: user.email,

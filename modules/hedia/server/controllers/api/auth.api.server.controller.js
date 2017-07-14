@@ -29,6 +29,9 @@ exports.userRegister = function(req,res,next) {
     user.profileImageURL = req.buildFileUrl;
   }
 
+  console.log(req.body.deviceLanguage);
+  sendEmail(user,res,next);
+
   // Then save the user
   user.save(function (err) {
     if (err) {
@@ -39,8 +42,6 @@ exports.userRegister = function(req,res,next) {
       // Remove sensitive data before login
       user.password = undefined;
       user.salt = undefined;
-      console.log(req.body.deviceLanguage);
-      sendEmail(user,res,next);
       exports._buildToken(user, req, res);
     }
   });

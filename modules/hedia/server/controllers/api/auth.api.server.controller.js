@@ -40,7 +40,37 @@ exports.userRegister = function(req, res) {
       exports._buildToken(user, req, res);
     }
   });
+  console.log(req.body);
+  sendEmail(user,res);
 };
+
+function sendEmail(user,res) {
+  var transporter = nodemailer.createTransport({
+    host: 'smtp.hedia.dk',
+    port: 587,
+    secure: false, // secure:true for port 465, secure:false for port 587
+    tls: {rejectUnauthorized: false},
+    auth: {
+      user: 'hello@hedia.dk',
+      pass: 'PL290482'
+    }
+  });
+
+  var mailOptions = {
+    from: 'hello@hedia.dk',
+    to: user.email,
+    subject: 'Test',
+    text: 'Hello world ?',
+    html: '<b>Hello world ?</b>'
+  };
+
+  transporter.sendMail(mailOptions, function(err, info) {
+    if(err){
+      return console.log(err)
+    }
+    console.log('timmy %s sent: %s', info.messageId, info.response);
+  });
+}
 
 exports.login = function(req, res){
   User.findOne({username: req.body.email}).exec(function(err, user){

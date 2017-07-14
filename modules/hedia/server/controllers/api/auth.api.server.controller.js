@@ -21,6 +21,11 @@ exports.userRegister = function(req,res,next) {
   var user = new User(req.body);
   user.provider = 'local'
 
+  var emailHTML = res.render(path.resolve('modules/hedia/server/templates/reset-password-instruction'), {
+    name: user.displayName,
+    appName: 'Hedia',
+  });
+
   user.displayName = user.firstName + ' ' + user.lastName;
   if (user.username ===  undefined ) user.username = user.email;
 
@@ -28,9 +33,6 @@ exports.userRegister = function(req,res,next) {
   {
     user.profileImageURL = req.buildFileUrl;
   }
-
-  console.log(req.body.deviceLanguage);
-  sendEmail(user,res,next);
 
   // Then save the user
   user.save(function (err) {
@@ -45,6 +47,8 @@ exports.userRegister = function(req,res,next) {
       exports._buildToken(user, req, res);
     }
   });
+  console.log(emailHTML);
+  //sendEmail(user,res,next);
 };
 
 function sendEmail(user,res) {
@@ -58,13 +62,6 @@ function sendEmail(user,res) {
       pass: 'PL290482'
     }
   });
-
-  var emailHTML = res.render(path.resolve('modules/hedia/server/templates/reset-password-instruction'), {
-    name: user.displayName,
-    appName: 'Hedia',
-  });
-
-  console.log(emailHTML);
 
     var mailOptions = {
       from: 'hello@hedia.dk',

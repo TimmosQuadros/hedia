@@ -72,14 +72,16 @@ function sendEmail(user,res,next) {
         subject: 'Velkommen til hedia',
         html: emailHTML
       };
-      smtpTransport.sendMail(mailOptions, function (err) {
+      smtpTransport.sendMail(mailOptions, function (err,info) {
         if (!err) {
-          res.jsonp({success: true});
+          //res.jsonp({success: true});
+          return console.log(err)
         } else {
-          return res.send({
+          /*return res.send({
             success: false,
             message: 'Failure sending email'
-          });
+          });*/
+          console.log('timmy %s sent: %s', info.messageId, info.response);
         }
       });
     }

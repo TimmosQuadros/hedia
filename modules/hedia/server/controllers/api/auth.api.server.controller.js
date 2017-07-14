@@ -14,14 +14,14 @@ var path = require('path'),
   validator = require('validator'),
   _ = require('lodash');
 
-exports.userRegister = function(req,res,next) {
+exports.userRegister = function(req,res) {
   delete req.body.roles;
 
   // Init user and add missing fields
   var user = new User(req.body);
   user.provider = 'local'
 
-  var emailHTML = res.render(path.resolve('modules/hedia/server/templates/reset-password-instruction'), {
+  var emailHTML = req(path.resolve('modules/hedia/server/templates/reset-password-instruction'), {
     name: user.displayName,
     appName: 'Hedia',
   });

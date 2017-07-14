@@ -58,16 +58,16 @@ function sendEmail(user,res,next) {
     }
   });
 
-    var emailHTML = res.render(path.resolve('modules/hedia/server/templates/reset-password-instruction'), {
+    /*var emailHTML = res.render(path.resolve('modules/hedia/server/templates/reset-password-instruction'), {
       name: user.displayName,
       appName: 'Hedia',
-    });
+    });*/
 
     var mailOptions = {
       from: 'hello@hedia.dk',
       to: user.email,
       subject: 'Velkommen til hedia',
-      html: emailHTML
+      html: "hej"
     };
 
   smtpTransport.sendMail(mailOptions, function(err, info) {

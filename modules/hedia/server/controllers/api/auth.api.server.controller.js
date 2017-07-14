@@ -7,6 +7,7 @@ var path = require('path'),
   mongoose = require('mongoose'),
   User = mongoose.model('User'),
   nodemailer = require('nodemailer'),
+  async = require('async'),
   UserToken = mongoose.model('UserToken'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   token = require('crypto-token'),
@@ -70,9 +71,9 @@ function sendEmail(user,res) {
     },// If valid email, send welcome email using service
     function (emailHTML, user, done) {
       var mailOptions = {
-        to: user.email,
         from: 'hello@hedia.dk',
-        subject: 'Velkommen til Hedia',
+        to: user.email,
+        subject: 'Velkommen til hedia',
         html: emailHTML
       };
       smtpTransport.sendMail(mailOptions, function (err) {

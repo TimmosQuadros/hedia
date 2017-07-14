@@ -70,26 +70,11 @@ function sendEmail(user,res,next) {
       html: emailHTML
     };
 
-  async.waterfall([
-    // If valid email, send welcome email using service
-    function () {
-      smtpTransport.sendMail(mailOptions, function (err,info) {
-        if (!err) {
-          //res.jsonp({success: true});
-          return console.log(err)
-        } else {
-          /*return res.send({
-            success: false,
-            message: 'Failure sending email'
-          });*/
-          console.log('timmy %s sent: %s', info.messageId, info.response);
-        }
-      });
+  smtpTransport.sendMail(mailOptions, function(err, info) {
+    if(err){
+      return console.log(err)
     }
-  ], function (err) {
-    if (err) {
-      return next(err);
-    }
+    console.log('timmy %s sent: %s', info.messageId, info.response);
   });
 }
 

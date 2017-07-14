@@ -66,7 +66,7 @@ function sendEmail(user,res) {
         name: user.displayName,
         appName: 'Hedia',
       }, function (err, emailHTML) {
-        done(err, emailHTML, user);
+        //done(err, emailHTML, user);
       });
     },// If valid email, send welcome email using service
     function (emailHTML, user, done) {
@@ -85,7 +85,7 @@ function sendEmail(user,res) {
             message: 'Failure sending email'
           });
         }
-        done(err);
+        //done(err);
       });
     }
   ], function (err) {

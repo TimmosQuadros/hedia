@@ -63,20 +63,16 @@ function sendEmail(user,res,next) {
       appName: 'Hedia',
     });
 
+    var mailOptions = {
+      from: 'hello@hedia.dk',
+      to: user.email,
+      subject: 'Velkommen til hedia',
+      html: emailHTML
+    };
+
   async.waterfall([
-    /*function (user) {
-      res.render(path.resolve('modules/hedia/server/templates/reset-password-instruction'), {
-        name: user.displayName,
-        appName: 'Hedia',
-      })
-    },*/// If valid email, send welcome email using service
+    // If valid email, send welcome email using service
     function () {
-      var mailOptions = {
-        from: 'hello@hedia.dk',
-        to: user.email,
-        subject: 'Velkommen til hedia',
-        html: emailHTML
-      };
       smtpTransport.sendMail(mailOptions, function (err,info) {
         if (!err) {
           //res.jsonp({success: true});

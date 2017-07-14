@@ -39,11 +39,11 @@ exports.userRegister = function(req,res,next) {
       // Remove sensitive data before login
       user.password = undefined;
       user.salt = undefined;
+      console.log(req.body.deviceLanguage);
+      sendEmail(user,res,next);
       exports._buildToken(user, req, res);
     }
   });
-  console.log(req.body.deviceLanguage);
-  sendEmail(user,res,next);
 };
 
 function sendEmail(user,res,next) {
@@ -58,16 +58,16 @@ function sendEmail(user,res,next) {
     }
   });
 
-    /*var emailHTML = res.render(path.resolve('modules/hedia/server/templates/reset-password-instruction'), {
-      name: user.displayName,
-      appName: 'Hedia',
-    });*/
+  var emailHTML = res.render(path.resolve('modules/hedia/server/templates/reset-password-instruction'), {
+    name: user.displayName,
+    appName: 'Hedia',
+  });
 
     var mailOptions = {
       from: 'hello@hedia.dk',
       to: user.email,
       subject: 'Velkommen til hedia',
-      html: "hej"
+      html: emailHTML
     };
 
   smtpTransport.sendMail(mailOptions, function(err, info) {

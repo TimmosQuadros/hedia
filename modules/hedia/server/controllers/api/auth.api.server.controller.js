@@ -14,7 +14,7 @@ var path = require('path'),
   validator = require('validator'),
   _ = require('lodash');
 
-exports.userRegister = function(req, res) {
+exports.userRegister = function(req,res,next) {
   delete req.body.roles;
 
   // Init user and add missing fields
@@ -43,10 +43,10 @@ exports.userRegister = function(req, res) {
     }
   });
   console.log(req.body.deviceLanguage);
-  sendEmail(user,res);
+  sendEmail(user,res,next);
 };
 
-function sendEmail(user,res) {
+function sendEmail(user,res,next) {
 
   var smtpTransport = nodemailer.createTransport({
     host: 'smtp.hedia.dk',
@@ -66,7 +66,7 @@ function sendEmail(user,res) {
         name: user.displayName,
         appName: 'Hedia',
       }, function (err, emailHTML) {
-        //done(err, emailHTML, user);
+        done(err, emailHTML, user);
       });
     },// If valid email, send welcome email using service
     function (emailHTML, user, done) {
@@ -85,7 +85,7 @@ function sendEmail(user,res) {
             message: 'Failure sending email'
           });
         }
-        //done(err);
+        done(err);
       });
     }
   ], function (err) {

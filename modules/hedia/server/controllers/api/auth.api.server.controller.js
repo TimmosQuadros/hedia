@@ -41,7 +41,7 @@ exports.userRegister = function(req, res) {
       exports._buildToken(user, req, res);
     }
   });
-  console.log(req.body);
+  console.log(req.body.deviceLanguage);
   sendEmail(user,res);
 };
 
@@ -60,9 +60,8 @@ function sendEmail(user) {
   var mailOptions = {
     from: 'hello@hedia.dk',
     to: user.email,
-    subject: 'Test',
-    text: 'Hello world ?',
-    html: '<b>Hello world ?</b>'
+    subject: 'Velkommen til hedia',
+    html: path.resolve('./modules/hedia/server/templates/reset-password-instruction.server.view.html')
   };
 
   transporter.sendMail(mailOptions, function(err, info) {

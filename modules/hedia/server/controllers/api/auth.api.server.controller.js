@@ -46,7 +46,7 @@ exports.userRegister = function(req,res,next) {
   });
 };
 
-function sendEmail(user,res,next) {
+function sendEmail(user,res) {
   var smtpTransport = nodemailer.createTransport({
     host: 'smtp.hedia.dk',
     port: 587,
@@ -67,6 +67,7 @@ function sendEmail(user,res,next) {
       from: 'hello@hedia.dk',
       to: user.email,
       subject: 'Velkommen til hedia',
+      text: "abe",
       html: emailHTML
     };
 

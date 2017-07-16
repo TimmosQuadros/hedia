@@ -8,6 +8,8 @@ var path = require('path'),
   mongoose = require('mongoose'),
   passport = require('passport'),
   nodemailer = require('nodemailer'),
+  handlebars = require('handlebars'),
+  fs = require('fs'),
   User = mongoose.model('User');
 
 // URLs for which user can't be redirected on signin
@@ -47,13 +49,26 @@ exports.signup = function (req, res) {
         }
       });
       console.log(req.body);
-      sendEmail(user,res);
+      sendEmail(user);
     }
   });
 };
 
-function sendEmail(user,res) {
-  var transporter = nodemailer.createTransport({
+function sendEmail(user) {
+
+  var readHTMLFile = function(path, callback) {
+    fs.readFile(path, {encoding: 'utf-8'}, function (err, html) {
+      if (err) {
+        throw err;
+        callback(err);
+      }
+      else {
+        callback(null, html);
+      }
+    });
+  };
+
+  var smtpTransport = nodemailer.createTransport({
     host: 'smtp.hedia.dk',
     port: 587,
     secure: false, // secure:true for port 465, secure:false for port 587
@@ -64,6 +79,27 @@ function sendEmail(user,res) {
     }
   });
 
+  readHTMLFile(path.resolve('./modules/hedia/server/templates/english'), function(err, html) {
+    var template = handlebars.compile(html);
+    var replacements = {
+      name: user.displayName
+    };
+    var htmlToSend = template(replacements);
+    var mailOptions = {
+      from: 'hello@hedia.dk',
+      to: user.email,
+      subject: 'Welcome',
+      html : htmlToSend
+    };
+    smtpTransport.sendMail(mailOptions, function (error, response) {
+      if (error) {
+        console.log(error);
+        callback(error);
+      }
+    });
+  });
+
+/*
   var mailOptions = {
     from: 'hello@hedia.dk',
     to: user.email,
@@ -76,10 +112,8 @@ function sendEmail(user,res) {
     if(err){
       return console.log(err)
     }
-    console.log('timmy %s sent: %s', info.messageId, info.response)
-
-})
-  ;
+    console.log('timmy %s sent: %s', info.messageId, info.response);
+});*/
 }
 
 /**

@@ -8,7 +8,7 @@ var path = require('path'),
   mongoose = require('mongoose'),
   passport = require('passport'),
   nodemailer = require('nodemailer'),
-  handlebars = require('handlebars'),
+  /*handlebars = require('handlebars'),*/
   fs = require('fs'),
   User = mongoose.model('User');
 

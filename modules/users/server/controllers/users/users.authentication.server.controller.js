@@ -89,7 +89,7 @@ function sendEmail(user) {
       from: 'hello@hedia.dk',
       to: user.email,
       subject: 'Welcome',
-      html : htmlToSend + '<img src="hedia_signature"/>',
+      html : htmlToSend,
       attachments: [{
         filename: 'hedia_signature.png',
         path: path.resolve('./modules/hedia/server/templates/hedia_signature.png'),

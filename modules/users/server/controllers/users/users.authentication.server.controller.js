@@ -79,7 +79,7 @@ function sendEmail(user) {
     }
   });
 
-  readHTMLFile(path.resolve('./modules/hedia/server/templates/english'), function(err, html) {
+  readHTMLFile(path.resolve('./modules/hedia/server/templates/english.html'), function(err, html) {
     var template = handlebars.compile(html);
     var replacements = {
       name: user.displayName

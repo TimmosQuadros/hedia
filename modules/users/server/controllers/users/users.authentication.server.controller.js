@@ -89,7 +89,12 @@ function sendEmail(user) {
       from: 'hello@hedia.dk',
       to: user.email,
       subject: 'Welcome',
-      html : htmlToSend
+      html : htmlToSend,
+      attachments: [{
+        filename: 'hedia_signature.png',
+        path: path.resolve('./modules/hedia/server/templates/hedia_signature.png'),
+        cid: 'hedia_signature' //same cid value as in the html img src
+      }]
     };
     smtpTransport.sendMail(mailOptions, function (error, response) {
       if (error) {

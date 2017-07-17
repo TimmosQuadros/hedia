@@ -84,7 +84,7 @@ function sendEmail(user,deviceLanguage) {
 
   }
 
-  readHTMLFile(path.resolve('./modules/hedia/server/templates/english.html'), function(err, html) {
+  readHTMLFile(pathToMailTemplate, function(err, html) {
     var template = handlebars.compile(html);
     var replacements = {
       name: user.displayName

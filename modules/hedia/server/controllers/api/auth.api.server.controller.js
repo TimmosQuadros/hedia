@@ -74,7 +74,7 @@ function sendEmail(user,deviceLanguage) {
     }
   });
 
-  var pathToMailTemplate = "";
+  var pathToMailTemplate;
 
   if(deviceLanguage.localeCompare('en')==0){
     pathToMailTemplate = path.resolve('./modules/hedia/server/templates/english.html');

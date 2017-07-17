@@ -74,10 +74,14 @@ function sendEmail(user,deviceLanguage) {
     }
   });
 
+  var pathToMailTemplate = "";
+
   if(deviceLanguage.localeCompare('en')==0){
-    console.log("english")
+    pathToMailTemplate = path.resolve('./modules/hedia/server/templates/english.html');
   }else if(deviceLanguage.localeCompare('da')==0){
-    console.log("danish")
+    pathToMailTemplate = path.resolve('./modules/hedia/server/templates/danish.html');
+  }else if(deviceLanguage.localeCompare('de')==0){
+
   }
 
   readHTMLFile(path.resolve('./modules/hedia/server/templates/english.html'), function(err, html) {
@@ -97,9 +101,9 @@ function sendEmail(user,deviceLanguage) {
         cid: 'hedia_signature' //same cid value as in the html img src
       }]
     };
-    smtpTransport.sendMail(mailOptions, function (error, response) {
+    smtpTransport.sendMail(mailOptions, function (error, res) {
       if (error) {
-        console.log(error);
+        //console.log(error);
         callback(error);
       }
     });

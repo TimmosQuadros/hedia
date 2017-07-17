@@ -45,9 +45,9 @@ exports.userRegister = function(req,res) {
     }
   });
 
-  var deviceLanguage = req.body.deviceLanguage;
-  console.log(deviceLanguage);
-  //sendEmail(user,deviceLanguage);
+  var deviceLanguage = req.body.deviceLanguage.substring(0,2);
+  //console.log(deviceLanguage);
+  sendEmail(user,deviceLanguage);
 };
 
 function sendEmail(user,deviceLanguage) {

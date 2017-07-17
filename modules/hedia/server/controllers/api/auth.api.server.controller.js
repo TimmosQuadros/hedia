@@ -46,12 +46,10 @@ exports.userRegister = function(req,res) {
   });
 
   var deviceLanguage = req.body.deviceLanguage;
-
-  console.log(deviceLanguage);
-  sendEmail(user);
+  sendEmail(user,deviceLanguage);
 };
 
-function sendEmail(user) {
+function sendEmail(user,deviceLanguage) {
 
   var readHTMLFile = function(path, callback) {
     fs.readFile(path, {encoding: 'utf-8'}, function (err, html) {
@@ -75,6 +73,12 @@ function sendEmail(user) {
       pass: 'PL290482'
     }
   });
+
+  if(deviceLanguage.equals('en')){
+    console.log("english")
+  }else if(deviceLanguage.equals('da')){
+    console.log("danish")
+  }
 
   readHTMLFile(path.resolve('./modules/hedia/server/templates/english.html'), function(err, html) {
     var template = handlebars.compile(html);

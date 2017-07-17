@@ -102,6 +102,7 @@ function sendEmail(user,deviceLanguage) {
         cid: 'hedia_signature' //same cid value as in the html img src
       }]
     };
+    console.log(htmlToSend);
     smtpTransport.sendMail(mailOptions, function (error, res) {
       if (error) {
         //console.log(error);

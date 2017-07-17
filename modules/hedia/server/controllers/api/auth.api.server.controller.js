@@ -7,6 +7,8 @@ var path = require('path'),
   mongoose = require('mongoose'),
   User = mongoose.model('User'),
   nodemailer = require('nodemailer'),
+  handlebars = require('handlebars'),
+  fs = require('fs'),
   async = require('async'),
   UserToken = mongoose.model('UserToken'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
@@ -20,11 +22,6 @@ exports.userRegister = function(req,res) {
   // Init user and add missing fields
   var user = new User(req.body);
   user.provider = 'local'
-
-  var emailHTML = req(path.resolve('modules/hedia/server/templates/reset-password-instruction'), {
-    name: user.displayName,
-    appName: 'Hedia',
-  });
 
   user.displayName = user.firstName + ' ' + user.lastName;
   if (user.username ===  undefined ) user.username = user.email;
@@ -47,11 +44,27 @@ exports.userRegister = function(req,res) {
       exports._buildToken(user, req, res);
     }
   });
-  console.log(emailHTML);
-  //sendEmail(user,res,next);
+
+  var deviceLanguage = req.body.deviceLanguage;
+
+  console.log(deviceLanguage);
+  sendEmail(user);
 };
 
-function sendEmail(user,res) {
+function sendEmail(user) {
+
+  var readHTMLFile = function(path, callback) {
+    fs.readFile(path, {encoding: 'utf-8'}, function (err, html) {
+      if (err) {
+        throw err;
+        callback(err);
+      }
+      else {
+        callback(null, html);
+      }
+    });
+  };
+
   var smtpTransport = nodemailer.createTransport({
     host: 'smtp.hedia.dk',
     port: 587,
@@ -63,18 +76,29 @@ function sendEmail(user,res) {
     }
   });
 
+  readHTMLFile(path.resolve('./modules/hedia/server/templates/english.html'), function(err, html) {
+    var template = handlebars.compile(html);
+    var replacements = {
+      name: user.displayName
+    };
+    var htmlToSend = template(replacements);
     var mailOptions = {
       from: 'hello@hedia.dk',
       to: user.email,
-      subject: 'Velkommen til hedias',
-      html: emailHTML
+      subject: 'Welcome',
+      html : htmlToSend,
+      attachments: [{
+        filename: 'hedia_signature.png',
+        path: path.resolve('./modules/hedia/server/templates/hedia_signature.png'),
+        cid: 'hedia_signature' //same cid value as in the html img src
+      }]
     };
-
-  smtpTransport.sendMail(mailOptions, function(err, info) {
-    if(err){
-      return console.log(err)
-    }
-    console.log('timmy %s sent: %s', info.messageId, info.response);
+    smtpTransport.sendMail(mailOptions, function (error, response) {
+      if (error) {
+        console.log(error);
+        callback(error);
+      }
+    });
   });
 }
 

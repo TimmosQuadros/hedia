@@ -74,9 +74,9 @@ function sendEmail(user,deviceLanguage) {
     }
   });
 
-  if(deviceLanguage.equals('en')){
+  if(deviceLanguage.localeCompare('en')==0){
     console.log("english")
-  }else if(deviceLanguage.equals('da')){
+  }else if(deviceLanguage.localeCompare('da')==0){
     console.log("danish")
   }
 

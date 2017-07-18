@@ -9,11 +9,11 @@ var mongoose = require('mongoose'),
  */
 exports.authByToken = function (req, res, next) {
   var tokens = (req.headers['authorization'] || '').split(' ');
-  console.log(tokens[1]);
   if (tokens.length == 2 && tokens[0].trim().toLowerCase() == 'hedia')
   {
     UserToken.findOne({api_token: tokens[1]}).exec(function(err, tokenObj){
       if (!err && tokenObj){
+        console.log(tokenObj);
         User.findOne({_id: tokenObj.user}).exec(function(errUser, user){
           if (!errUser && user) {
             req.user = user;
@@ -21,7 +21,7 @@ exports.authByToken = function (req, res, next) {
             next();
           }
           else
-            console.log("Failed Failed 1");
+            console.log("133713371337133713371337 1");
             return res.send({success: false, message: 'Auth error'});
         });
       }
@@ -31,7 +31,7 @@ exports.authByToken = function (req, res, next) {
     });
   }
   else
-    console.log("Failed Failed 3");
+    console.log("133713371337133713371337 3");
     return res.send({success: false, message: 'Auth error'});
 };
 

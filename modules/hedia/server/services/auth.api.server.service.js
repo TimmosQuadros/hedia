@@ -8,6 +8,7 @@ var mongoose = require('mongoose'),
  * Module dependencies.
  */
 exports.authByToken = function (req, res, next) {
+  console.log(req.headers['authorization']);
   var tokens = (req.headers['authorization'] || '').split(' ');
   if (tokens.length == 2 && tokens[0].trim().toLowerCase() == 'hedia')
   {

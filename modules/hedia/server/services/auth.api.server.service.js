@@ -9,7 +9,7 @@ var mongoose = require('mongoose'),
  */
 exports.authByToken = function (req, res, next) {
   var tokens = (req.headers['authorization'] || '').split(' ');
-  console.log(tokens[0]+" "+tokens[1]);
+  console.log(tokens[1]);
   if (tokens.length == 2 && tokens[0].trim().toLowerCase() == 'hedia')
   {
     UserToken.findOne({api_token: tokens[1]}).exec(function(err, tokenObj){

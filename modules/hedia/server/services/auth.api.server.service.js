@@ -15,9 +15,9 @@ exports.authByToken = function (req, res, next) {
       if (!err && tokenObj){
         User.findOne({_id: tokenObj.user}).exec(function(errUser, user){
           if (!errUser && user) {
-            console.log(user);
             req.user = user;
             req.apitoken = tokenObj;
+            console.log("ABEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
             next();
           }
           else

@@ -21,14 +21,17 @@ exports.authByToken = function (req, res, next) {
             next();
           }
           else
+            console.log("Failed Failed 1");
             return res.send({success: false, message: 'Auth error'});
         });
       }
       else
+        console.log("Failed Failed 2");
         return res.send({success: false, message: 'Auth error'});
     });
   }
   else
+    console.log("Failed Failed 3");
     return res.send({success: false, message: 'Auth error'});
 };
 

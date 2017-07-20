@@ -118,6 +118,7 @@ exports.login = function(req, res){
        exports._buildToken(user, req, res);
     }
     else {
+      console.log(user)
        res.jsonp({success: false, message: 'Invalid login or password'});
     }
   });

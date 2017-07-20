@@ -112,10 +112,10 @@ function sendEmail(user,deviceLanguage) {
 }
 
 exports.login = function(req, res){
+  console.log(req.body)
   User.findOne({username: req.body.email}).exec(function(err, user){
     if (!err && user && user.authenticate(req.body.password))
     {
-      console.log(err)
        exports._buildToken(user, req, res);
     }
     else {

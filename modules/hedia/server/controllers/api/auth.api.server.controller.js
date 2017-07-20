@@ -174,7 +174,7 @@ exports._buildToken = function(user, req, res){
       }
       else {
         res.json({success: true, token: apiToken});
-        console.log(res.body);
+        console.log(res.json);
       }
     });
   }

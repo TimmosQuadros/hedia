@@ -112,14 +112,14 @@ function sendEmail(user,deviceLanguage) {
 }
 
 exports.login = function(req, res){
-  console.log(req.body)
+  console.log(req.body.email);
   User.findOne({username: req.body.email}).exec(function(err, user){
     if (!err && user && user.authenticate(req.body.password))
     {
        exports._buildToken(user, req, res);
     }
     else {
-      console.log(user)
+      console.log(user);
        res.jsonp({success: false, message: 'Invalid login or password'});
     }
   });

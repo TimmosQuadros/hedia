@@ -116,6 +116,7 @@ exports.login = function(req, res){
   User.findOne({username: req.body.email}).exec(function(err, user){
     if (!err && user && user.authenticate(req.body.password))
     {
+      console.log(user);
        exports._buildToken(user, req, res);
     }
     else {

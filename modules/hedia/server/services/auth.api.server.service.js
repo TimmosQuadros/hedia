@@ -17,22 +17,18 @@ exports.authByToken = function (req, res, next) {
         User.findOne({_id: tokenObj.user}).exec(function(errUser, user){
           if (!errUser && user) {
             req.user = user;
-            console.log("ABEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
             req.apitoken = tokenObj;
             next();
           }
           else
-            console.log("133713371337133713371337 1");
             return res.send({success: false, message: 'Auth error'});
         });
       }
       else
-        console.log("Failed Failed 2");
         return res.send({success: false, message: 'Auth error'});
     });
   }
   else
-    console.log("133713371337133713371337 3");
     return res.send({success: false, message: 'Auth error'});
 };
 

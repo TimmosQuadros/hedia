@@ -6,17 +6,13 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   User = mongoose.model('User'),
-  nodemailer = require('nodemailer'),
-  handlebars = require('handlebars'),
-  fs = require('fs'),
-  async = require('async'),
   UserToken = mongoose.model('UserToken'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   token = require('crypto-token'),
   validator = require('validator'),
   _ = require('lodash');
 
-exports.userRegister = function(req,res) {
+exports.userRegister = function(req, res) {
   delete req.body.roles;
 
   // Init user and add missing fields
@@ -44,81 +40,16 @@ exports.userRegister = function(req,res) {
       exports._buildToken(user, req, res);
     }
   });
-
-  var deviceLanguage = req.body.deviceLanguage.substring(0,2);
-  //console.log(deviceLanguage);
-  sendEmail(user,deviceLanguage);
 };
-
-function sendEmail(user,deviceLanguage) {
-
-  var readHTMLFile = function(path, callback) {
-    fs.readFile(path, {encoding: 'utf-8'}, function (err, html) {
-      if (err) {
-        throw err;
-        callback(err);
-      }
-      else {
-        callback(null, html);
-      }
-    });
-  };
-
-  var smtpTransport = nodemailer.createTransport({
-    host: 'smtp.hedia.dk',
-    port: 587,
-    secure: false, // secure:true for port 465, secure:false for port 587
-    tls: {rejectUnauthorized: false},
-    auth: {
-      user: 'hello@hedia.dk',
-      pass: 'PL290482'
-    }
-  });
-
-  var pathToMailTemplate;
-
-  if(deviceLanguage.localeCompare('en')==0){
-    pathToMailTemplate = path.resolve('./modules/hedia/server/templates/english.html');
-  }else if(deviceLanguage.localeCompare('da')==0){
-    pathToMailTemplate = path.resolve('./modules/hedia/server/templates/danish.html');
-  }else if(deviceLanguage.localeCompare('de')==0){
-
-  }
-
-  readHTMLFile(pathToMailTemplate, function(err, html) {
-    var template = handlebars.compile(html);
-    var replacements = {
-      name: user.displayName
-    };
-    var htmlToSend = template(replacements);
-    var mailOptions = {
-      from: 'hello@hedia.dk',
-      to: user.email,
-      subject: 'Welcome',
-      html : htmlToSend,
-      attachments: [{
-        filename: 'hedia_signature.png',
-        path: path.resolve('./modules/hedia/server/templates/hedia_signature.png'),
-        cid: 'hedia_signature' //same cid value as in the html img src
-      }]
-    };
-    smtpTransport.sendMail(mailOptions, function (error, res) {
-      if (error) {
-        //console.log(error);
-        callback(error);
-      }
-    });
-  });
-}
 
 exports.login = function(req, res){
   User.findOne({username: req.body.email}).exec(function(err, user){
     if (!err && user && user.authenticate(req.body.password))
     {
-       exports._buildToken(user, req, res);
+      exports._buildToken(user, req, res);
     }
     else {
-       res.jsonp({success: false, message: 'Invalid login or password'});
+      res.jsonp({success: false, message: 'Invalid login or password'});
     }
   });
 };

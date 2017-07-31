@@ -33,6 +33,7 @@ exports.authByToken = function (req, res, next) {
 
 exports.checkFBToken = function (req, res, next) {
   var accessToken = req.body.access_token;
+  console.log(accessToken);
   if (accessToken === undefined)
   {
      return res.send({success: false, message: 'Invalid access token'});

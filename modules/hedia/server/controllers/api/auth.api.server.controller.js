@@ -104,7 +104,7 @@ exports._buildToken = function(user, req, res){
         });
       }
       else {
-        res.json({success: true, token: apiToken});
+        res.jsonp({success: true, token: apiToken});
       }
     });
   }

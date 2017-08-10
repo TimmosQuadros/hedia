@@ -38,6 +38,6 @@ module.exports = function(app) {
 
   //food APIs
   app.route('/api/v1/post-food').post([reqServ.checkJsonHeader, authServ.authByToken], apiController.postFood);
-  app.route('/api/v1/get-food').get( authServ.authByToken, apiController.getFood);
+  //app.route('/api/v1/get-food').get( authServ.authByToken, apiController.getFood);
 };
 

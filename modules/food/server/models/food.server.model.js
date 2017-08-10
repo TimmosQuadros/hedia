@@ -4,22 +4,21 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-  Schema = mongoose.Schema;
+    Schema = mongoose.Schema;
 
 /**
 * Food Schema
 */
 var FoodSchema = new Schema({
-  name: {
+    title: {
         type: String,
         unique: 'name already exists',
         trim: true,
         lowercase: true
     },
-  energy: {
-         type: Number,
+    energy: {
+        type: Number,
         default: 0
-        
     },
     proteins: {
         type: Number,
@@ -58,12 +57,12 @@ var FoodSchema = new Schema({
     },
     hediaStatus: {
         type: String,
-        enum : ['pending', 'approved'],
+        enum: ['pending', 'approved'],
         default: 'pending'
     },
     meassureUnit: {
         type: String,
-        enum : ['g', 'l', 'ml'],
+        enum: ['g', 'l', 'ml'],
         default: 'g'
     },
     category: {
@@ -77,7 +76,7 @@ var FoodSchema = new Schema({
         required: 'Please fill sub-category'
     },
 
-   
+
 });
 
 mongoose.model('Food', FoodSchema);

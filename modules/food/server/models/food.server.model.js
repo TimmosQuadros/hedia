@@ -6,11 +6,6 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-var parseDate = function (dateSTring) {
-    var newDate = dateSTring.split('-');
-    return newDate[1] + '-' + newDate[0] + '-' + newDate[2];
-};
-
 /**
 * Food Schema
 */

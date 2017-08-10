@@ -12,7 +12,7 @@ var mongoose = require('mongoose'),
 var UserFoodSchema = new Schema({
   meal: {
     type: [{
-      type: string,
+      type: String,
       enum: ['breakfast', 'lunch', 'dinner',]
     }],
     required: 'must provide meal type'

@@ -17,6 +17,7 @@ var UserFoodSchema = new Schema({
     }],
     required: 'must provide meal type'
 
+
   },
   user: {
     type: Schema.ObjectId,

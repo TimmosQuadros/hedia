@@ -11,13 +11,13 @@ var mongoose = require('mongoose'),
  * Category Schema
  */
 var CategorySchema = new Schema({
-  title: {
+  name: {
     type: String,
     unique: true,
     required: true
   },
   subCategory: {
-    type: Schema.ObjectId,
+    type: [Schema.ObjectId],
     ref: 'SubCategory'
   }
 });

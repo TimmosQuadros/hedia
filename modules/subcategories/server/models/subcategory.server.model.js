@@ -11,11 +11,10 @@ var mongoose = require('mongoose'),
  * SubCategory Schema
  */
 var SubCategorySchema = new Schema({
-  bloodGlucose: {
-    type: Number,
-    default: '',
-    required: 'Please fill Blood Glucose',
-    trim: true
+  name: {
+    type: String,
+    unique: true,
+    required: true
   },
   foods: {
     type: [Schema.ObjectId],

@@ -68,7 +68,7 @@ var FoodSchema = new Schema({
     },
     meassureUnit: {
         type: String,
-        enum: ['g', 'l', 'ml'],
+        enum: ['g', 'ml'],
         default: 'g'
     }
 

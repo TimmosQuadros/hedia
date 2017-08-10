@@ -49,7 +49,8 @@ var FoodSchema = new Schema({
         default: 'modules/food/client/img/food/default.jpg'
     },
     updated: {
-        type: Date
+        type: Date,
+        default: Date.now
     },
     created: {
         type: Date,

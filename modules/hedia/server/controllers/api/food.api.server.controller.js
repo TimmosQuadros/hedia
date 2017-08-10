@@ -30,6 +30,10 @@ var safeFoodObject = function (food) {
   };
 }
 
+exports.getFood = function(req, res) {
+  res.jsonp({success: true, food: safeFoodObject(req.food)});
+}
+
 exports.postFood = function(req, res) {
   var food = new Food(req.body);
   //food = req.user;

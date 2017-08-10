@@ -17,7 +17,7 @@ var SubCategorySchema = new Schema({
     required: true
   },
   foods: {
-    type: [Schema.ObjectId],
+    type: Schema.ObjectId,
     ref: 'Food'
   }
 });

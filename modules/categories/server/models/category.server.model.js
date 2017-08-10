@@ -17,7 +17,7 @@ var CategorySchema = new Schema({
     required: true
   },
   subCategory: {
-    type: [Schema.ObjectId],
+    type: Schema.ObjectId,
     ref: 'SubCategory'
   }
 });

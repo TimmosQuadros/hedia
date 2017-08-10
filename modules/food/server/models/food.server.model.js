@@ -12,7 +12,7 @@ var mongoose = require('mongoose'),
 var FoodSchema = new Schema({
     title: {
         type: String,
-        unique: 'name already exists',
+        unique: 'title already exists',
         trim: true,
         lowercase: true
     },

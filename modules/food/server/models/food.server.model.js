@@ -70,18 +70,7 @@ var FoodSchema = new Schema({
         type: String,
         enum: ['g', 'l', 'ml'],
         default: 'g'
-    },
-    category: {
-        type: String,
-        default: '',
-        required: 'Please fill category'
-    },
-    subCategory: {
-        type: String,
-        default: '',
-        required: 'Please fill sub-category'
-    },
-
+    }
 
 });
 

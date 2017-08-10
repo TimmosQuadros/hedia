@@ -35,5 +35,8 @@ module.exports = function(app) {
   app.route('/api/v1/remove-history-log/:historyLogId').delete([authServ.authByToken, apiController.historyLogByID], apiController.deleteHistory);
   //upload
   app.route('/api/v1/avatar-upload').post(authServ.authByToken, apiController.uploadImage);
+
+  //food APIs
+  app.route('/api/v1/post-food').post([reqServ.checkJsonHeader, authServ.authByToken], apiController.postFood);
 };
 

@@ -28,7 +28,7 @@ exports.postCategory = function (req, res) {
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.jsonp({ success: true, categories: safeCategoryObject(category) });
+      res.jsonp({ success: true, categories: safeCategoryObject(categories) });
     }
   });
 

@@ -35,8 +35,6 @@ var safeFoodObject = function (food) {
 
 exports.postFood = function (req, res) {
   var food = new Food(req.body);
-  console.log(food.category);
-  console.log(food.subCategory);
 
   Categories.find({ name: food.category }).exec(function (err, cat) {
     if (err) {
@@ -47,31 +45,31 @@ exports.postFood = function (req, res) {
     }
     else {
 
-      cat.subCategories.forEach(function (element) {
+      cat.forEach(function (element) {
+        /* 
+                if (element === food.subCategory) {
+        
+                  food.save(function (err) {
+                    if (err) {
+                      return res.send({
+                        success: false,
+                        message: errorHandler.getErrorMessage(err)
+                      });
+                    } else {
+                      res.jsonp({
+                        success: true,
+                        food: safeFoodObject(food)
+                      });
+                    }
+                  });
+                } else {
+                  res.jsonp({ 
+                    succes: false, 
+                    message: "subcategory doesn't exists" 
+                  });
+                } */
 
-        if (element === food.subCategory) {
-
-          food.save(function (err) {
-            if (err) {
-              return res.send({
-                success: false,
-                message: errorHandler.getErrorMessage(err)
-              });
-            } else {
-              res.jsonp({
-                success: true,
-                food: safeFoodObject(food)
-              });
-            }
-          });
-        } else {
-          res.jsonp({ 
-            succes: false, 
-            message: "subcategory doesn't exists" 
-          });
-        }
-
-
+        console.log(element);
 
       }, this);
 

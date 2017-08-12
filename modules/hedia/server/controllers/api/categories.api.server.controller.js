@@ -33,4 +33,6 @@ exports.postCategory = function (req, res) {
   });
 }
 
-
+exports.getCategories = function(req,res){
+  
+}

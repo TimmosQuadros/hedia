@@ -75,7 +75,8 @@ var FoodSchema = new Schema({
         type: String,
         enum: ['g', 'ml'],
         default: 'g'
-    },
+    }
+   /*  ,
     category: {
         type: String,
         enum: CATEGORIES,
@@ -86,7 +87,7 @@ var FoodSchema = new Schema({
         enum: SUBCATEGORIES,
         default: ''
     }
-
+ */
 });
 
 mongoose.model('Food', FoodSchema);

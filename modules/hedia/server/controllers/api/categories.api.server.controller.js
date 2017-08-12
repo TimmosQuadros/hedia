@@ -31,20 +31,6 @@ exports.postCategory = function (req, res) {
       res.jsonp({ success: true, categories: safeCategoryObject(categories) });
     }
   });
+}
 
-  exports.getCategories = function (req, res) {
-   
-    categories.find()(function (err, categories) {
-        if (err) {
-          return res.send({
-            success: false,
-            message: errorHandler.getErrorMessage(err)
-          });
-        }
-        else {
-          res.jsonp({ success: true, categories: categories });
-        }
-      })
-  }
 
-};

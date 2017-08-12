@@ -36,6 +36,7 @@ var safeFoodObject = function (food) {
 exports.postFood = function (req, res) {
   var food = new Food(req.body);
 console.log(food.category);
+console.log(food.subCategory);
 
   Categories.find({name: food.category}).exec(function (err, cat) {
     if (err) {

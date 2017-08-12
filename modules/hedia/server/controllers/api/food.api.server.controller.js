@@ -45,7 +45,10 @@ exports.postFood = function (req, res) {
       });
     }
     else {
-     var subCategories = JSON.parse(cat.subCategories);
+      var category = JSON.parse(cat);
+      console.log(category);
+     var subCategories = JSON.parse(category.subCategories);
+     
       subCategories.forEach(function (element) {
         console.log(element)
         if (element === food.subCategory) {

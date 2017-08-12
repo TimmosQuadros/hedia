@@ -41,7 +41,7 @@ exports.postFood = function (req, res) {
       console.log("erroooooooooooooooo");
       return res.send({
         success: false,
-        message: "category doesn't exists"
+        message: errorHandler.getErrorMessage(err)
       });
     }
     else {

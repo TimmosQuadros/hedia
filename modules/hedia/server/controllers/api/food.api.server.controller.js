@@ -49,15 +49,8 @@ exports.postFood = function (req, res) {
 
       cat.subCategories.forEach(function (element) {
 
-        console.log(element);
+        if (element === food.subCategory) {
 
-
-
-      }, this);
-
-      /* forEach(function (element) {
-        
-        if (element.subCategories === food.subCategory) {
           food.save(function (err) {
             if (err) {
               return res.send({
@@ -65,9 +58,10 @@ exports.postFood = function (req, res) {
                 message: errorHandler.getErrorMessage(err)
               });
             } else {
-              res.jsonp({ 
-                success: true, 
-                food: safeFoodObject(food) });
+              res.jsonp({
+                success: true,
+                food: safeFoodObject(food)
+              });
             }
           });
         } else {
@@ -77,7 +71,9 @@ exports.postFood = function (req, res) {
           });
         }
 
-      }, this); */
+
+
+      }, this);
 
     }
   });

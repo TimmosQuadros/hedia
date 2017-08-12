@@ -6,7 +6,7 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Food = mongoose.model('Food'),
-  Category = mongoose.model('Category')
+  //Category = mongoose.model('Category'),
   //subCategory = mongoose.model('SubCategory'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash'),
@@ -40,8 +40,7 @@ var safeCategoryObject = function (category) {
 
 exports.postFood = function(req, res) {
   var food = new Food(req.body);
-  //var category = new Category(req.body);
-  //var subCategory = new subCategory(req.body);
+  
   
   
   food.save(function (err) {
@@ -60,8 +59,7 @@ exports.postFood = function(req, res) {
 
 exports.postCategory = function(req, res) {
   var category = new Category(req.body);
-  //var category = new Category(req.body);
-  //var subCategory = new subCategory(req.body);
+  
   
   
   category.save(function (err) {

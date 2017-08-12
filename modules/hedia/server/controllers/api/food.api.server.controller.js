@@ -46,6 +46,13 @@ exports.postFood = function (req, res) {
     else {
 
       cat.forEach(function (element) {
+        
+        element.subCategories.forEach(function(subCategoryListItem){
+          console.log(subCategoryListItem);
+        }
+
+        )
+        
         /* 
                 if (element === food.subCategory) {
         
@@ -69,7 +76,7 @@ exports.postFood = function (req, res) {
                   });
                 } */
 
-        console.log(element);
+       // console.log(element);
 
       }, this);
 

@@ -45,9 +45,9 @@ exports.postFood = function (req, res) {
       });
     }
     else {
-      var subCat = cat.subCategories[0];
-      console.log(subCat);
-      subCat.forEach(function (element) {
+      //var subCat = cat;
+      //console.log(subCat);
+      cat.forEach(function (element) {
         if (element === food.subCategory) {
           food.save(function (err) {
             if (err) {

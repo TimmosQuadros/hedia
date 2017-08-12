@@ -34,5 +34,18 @@ exports.postCategory = function (req, res) {
 }
 
 exports.getCategories = function(req,res){
-  
+
+  categories.find().exec(function (err, categories){
+                if (err)
+                {
+                  return res.send({success: false,
+                    message: errorHandler.getErrorMessage(err)
+                  });
+                }
+                else {
+                  res.jsonp({success: true, categories: categories});
+                }
+             })
+
 }
+

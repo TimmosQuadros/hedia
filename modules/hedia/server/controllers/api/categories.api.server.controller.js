@@ -34,9 +34,7 @@ exports.postCategory = function (req, res) {
 
   exports.getCategories = function (req, res) {
    
-    categories.find()
-      .sort({ Name: 1 })
-      .exec(function (err, categories) {
+    categories.find()(function (err, categories) {
         if (err) {
           return res.send({
             success: false,

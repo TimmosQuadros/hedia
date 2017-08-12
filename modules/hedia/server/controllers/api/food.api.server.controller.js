@@ -35,7 +35,7 @@ var safeFoodObject = function (food) {
 
 exports.postFood = function (req, res) {
   var food = new Food(req.body);
-
+console.log(food.category);
 
   Categories.find({name: food.category}).exec(function (err, cat) {
     if (err) {
@@ -45,11 +45,11 @@ exports.postFood = function (req, res) {
       });
     }
     else {
-      var category = JSON.parse(cat);
-      console.log(category);
-     var subCategories = JSON.parse(category.subCategories);
+      //var category = JSON.parse(cat);
+     // console.log(category);
+    // var subCategories = JSON.parse(category.subCategories);
      
-      subCategories.forEach(function (element) {
+      cat.forEach(function (element) {
         console.log(element)
         if (element === food.subCategory) {
           food.save(function (err) {

@@ -44,7 +44,8 @@ exports.postFood = function (req, res) {
       });
     }
     else {
-      if(cat === []){
+      var emptyArray = []
+      if(cat.length<1){
         return res.send({succes: false,
           message: "category doesn't exists"
         });

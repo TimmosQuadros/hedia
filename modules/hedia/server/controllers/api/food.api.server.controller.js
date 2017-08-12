@@ -47,6 +47,7 @@ exports.postFood = function (req, res) {
     else {
       var subCat = [cat.subCategories];
       console.log(subCat);
+      console.log('-------------------------'+cat.subCategories);
       console.log('timmy er en abe' + '-------------------' + cat);
       subCat.forEach(function (element) {
         if (element === food.subCategory) {

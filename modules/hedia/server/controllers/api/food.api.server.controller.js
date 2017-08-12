@@ -49,12 +49,8 @@ exports.postFood = function (req, res) {
         
         element.subCategories.forEach(function(subCategoryListItem){
           console.log(subCategoryListItem);
-        }
 
-        )
-        
-        /* 
-                if (element === food.subCategory) {
+                if (subCategoryListItem === food.subCategory) {
         
                   food.save(function (err) {
                     if (err) {
@@ -74,10 +70,13 @@ exports.postFood = function (req, res) {
                     succes: false, 
                     message: "subcategory doesn't exists" 
                   });
-                } */
+                }
 
-       // console.log(element);
+        }
 
+        )
+        
+        
       }, this);
 
     }

@@ -6,8 +6,6 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Food = mongoose.model('Food'),
-  Categories = mongoose.model('Categories'),
-  //subCategory = mongoose.model('SubCategory'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash'),
   validator = require('validator');
@@ -26,54 +24,30 @@ var safeFoodObject = function (food) {
     updated: food.updated.toString(),
     created: food.created.toString(),
     hediaStatus: food.hediaStatus,
-    meassureUnit: food.meassureUnit
+    meassureUnit: food.meassureUnit,
+    category: food.category,
+    subCategory: food.subCategory
   };
 }
 
 
 
-exports.postFood = function(req, res) {
+exports.postFood = function (req, res) {
   var food = new Food(req.body);
-  
-  
-  
+
+
+
   food.save(function (err) {
     if (err) {
-      return res.send({success: false,
+      return res.send({
+        success: false,
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.jsonp({success: true, food: safeFoodObject(food)});
+      res.jsonp({ success: true, food: safeFoodObject(food) });
     }
   });
 
 
-  
-};
 
-var safeCategoryObject = function (category) {
-  return {
-    name: category.name,
-    subCategories: category.subCategories
-  };
-  
-}
-
-exports.postCategory = function(req, res) {
-  var category = new Categories(req.body);
-  
-  
-  
-  category.save(function (err) {
-    if (err) {
-      return res.send({success: false,
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.jsonp({success: true, food: safeCategoryObject(category)});
-    }
-  });
-
-
-  
 };

@@ -18,6 +18,8 @@ var CategoriesSchema = new Schema({
   },
   subCategories: {
     type: [String],
+    required: true,
+    default: 'other'
   }
 });
 

@@ -13,5 +13,5 @@ module.exports = _.extend(
   require('./api/upload.api.server.controller'),
   require('./api/userhistory.api.server.controller'),
   require('./api/food.api.server.controller'),
-   require('./api/categories.api.server.controller')
+  require('./api/categories.api.server.controller')
 );

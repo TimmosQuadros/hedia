@@ -37,7 +37,7 @@ exports.getCategories = function(req,res){
 
    var categories = new Categories(req.body);
    
-   categories.find().exec(function (err, cat){
+   categories.find({}).exec(function (err, cat){
                 if (err)
                 {
                   return res.send({success: false,

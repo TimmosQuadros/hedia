@@ -50,7 +50,7 @@ exports.postFood = function (req, res) {
         element.subCategories.forEach(function(subCategoryListItem){
           console.log(subCategoryListItem);
 
-                if (subCategoryListItem === food.subCategory) {
+                if (subCategoryListItem == food.subCategory) {
         
                   food.save(function (err) {
                     if (err) {
@@ -59,7 +59,7 @@ exports.postFood = function (req, res) {
                         message: errorHandler.getErrorMessage(err)
                       });
                     } else {
-                      res.jsonp({
+                      return res.jsonp({
                         success: true,
                         food: safeFoodObject(food)
                       });

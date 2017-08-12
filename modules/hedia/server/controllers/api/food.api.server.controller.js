@@ -30,13 +30,7 @@ var safeFoodObject = function (food) {
   };
 }
 
-var safeCategoryObject = function (category) {
-  return {
-    name: category.name,
-    subCategories: category.subCategories
-  };
-  
-}
+
 
 exports.postFood = function(req, res) {
   var food = new Food(req.body);
@@ -56,6 +50,14 @@ exports.postFood = function(req, res) {
 
   
 };
+
+var safeCategoryObject = function (category) {
+  return {
+    name: category.name,
+    subCategories: category.subCategories
+  };
+  
+}
 
 exports.postCategory = function(req, res) {
   var category = new Category(req.body);

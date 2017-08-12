@@ -44,7 +44,7 @@ exports.postFood = function (req, res) {
       });
     }
     else {
-      if(cat == []){
+      if(cat === []){
         return res.send({succes: false,
           message: "category doesn't exists"
         });

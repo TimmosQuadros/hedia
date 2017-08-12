@@ -30,6 +30,14 @@ var safeFoodObject = function (food) {
   };
 }
 
+var safeCategoryObject = function (category) {
+  return {
+    name: category.name,
+    subCategories: category.subCategories
+  };
+  
+}
+
 exports.postFood = function(req, res) {
   var food = new Food(req.body);
   //var category = new Category(req.body);
@@ -43,6 +51,26 @@ exports.postFood = function(req, res) {
       });
     } else {
       res.jsonp({success: true, food: safeFoodObject(food)});
+    }
+  });
+
+
+  
+};
+
+exports.postCategory = function(req, res) {
+  var category = new Category(req.body);
+  //var category = new Category(req.body);
+  //var subCategory = new subCategory(req.body);
+  
+  
+  category.save(function (err) {
+    if (err) {
+      return res.send({success: false,
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
+      res.jsonp({success: true, food: safeCategoryObject(category)});
     }
   });
 

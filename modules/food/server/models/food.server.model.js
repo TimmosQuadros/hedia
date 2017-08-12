@@ -6,6 +6,12 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
+    /**
+     * ENUMS
+     */
+    const CATEGORIES = ['DAIRY','GRAINS','EGG','BREAD','VEGETABLES','FRUIT','MEAT','FISH'];
+    const SUBCATEGORIES = ['','','',''];
+
 /**
 * Food Schema
 */
@@ -44,6 +50,10 @@ var FoodSchema = new Schema({
         type: Number,
         default: 0
     },
+    saturatedFat: {
+        type: Number,
+        default: 0
+    },
     productImageURL: {
         type: String,
         default: 'modules/food/client/img/food/default.jpg'
@@ -65,6 +75,16 @@ var FoodSchema = new Schema({
         type: String,
         enum: ['g', 'ml'],
         default: 'g'
+    },
+    category: {
+        type: String,
+        enum: CATEGORIES,
+        default: ''
+    },
+    subCategory: {
+        type: String,
+        enum: SUBCATEGORIES,
+        default: ''
     }
 
 });

@@ -19,9 +19,9 @@ var safeCategoryObject = function (category) {
 }
 
 exports.postCategory = function (req, res) {
-  var category = new Categories(req.body);
+  var categories = new Categories(req.body);
   
-  category.save(function (err) {
+  categories.save(function (err) {
     if (err) {
       return res.send({
         success: false,
@@ -34,7 +34,7 @@ exports.postCategory = function (req, res) {
 
   exports.getCategories = function (req, res) {
    
-    Categories.find()
+    categories.find()
       .sort({ Name: 1 })
       .exec(function (err, categories) {
         if (err) {

@@ -38,6 +38,7 @@ exports.postFood = function (req, res) {
 
   Categories.find({ name: food.category }).exec(function (err, cat) {
     if (err) {
+      console.log("erroooooooooooooooo");
       return res.send({
         success: false,
         message: "category doesn't exists"
@@ -48,7 +49,7 @@ exports.postFood = function (req, res) {
       cat.forEach(function (element) {
         
         element.subCategories.forEach(function(subCategoryListItem){
-          console.log(subCategoryListItem);
+          //console.log(subCategoryListItem);
 
                 if (subCategoryListItem == food.subCategory) {
         
@@ -59,8 +60,8 @@ exports.postFood = function (req, res) {
                         message: errorHandler.getErrorMessage(err)
                       });
                     } else {
-                      return res.jsonp({
-                        success: true,
+                      res.jsonp(
+                        {success: true,
                         food: safeFoodObject(food)
                       });
                     }

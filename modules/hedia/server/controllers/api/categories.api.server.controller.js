@@ -35,9 +35,9 @@ exports.postCategory = function (req, res) {
 
 exports.getCategories = function (req, res) {
 
-  var categories = new Categories(req.body);
+  
 
-  categories.find().exec(function (err, cat){
+  Categories.find().exec(function (err, cat){
                 if (err)
                 {
                   return res.send({success: false,

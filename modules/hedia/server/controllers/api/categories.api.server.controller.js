@@ -20,7 +20,7 @@ var safeCategoryObject = function (category) {
 
 exports.postCategory = function (req, res) {
   var categories = new Categories(req.body);
-  
+
   categories.save(function (err) {
     if (err) {
       return res.send({
@@ -33,21 +33,23 @@ exports.postCategory = function (req, res) {
   });
 }
 
-exports.getCategories = function(req,res){
+exports.getCategories = function (req, res) {
 
-   var categories = new Categories(req.body);
-   
-   categories.find({}).exec(function (err, cat){
-                if (err)
-                {
-                  return res.send({success: false,
-                    message: errorHandler.getErrorMessage(err)
-                  });
-                }
-                else {
-                  res.jsonp({success: true, categories: cat});
-                }
-             })
+  var categories = new Categories(req.body);
+
+  categories.find({}, (function (err, cat) {
+    if (err) {
+      return res.send({
+        success: false,
+        message: errorHandler.getErrorMessage(err)
+      });
+    }
+    else {
+      res.jsonp({ success: true, categories: cat });
+    }
+  })
+  )
 
 }
+
 

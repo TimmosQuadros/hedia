@@ -35,6 +35,7 @@ var safeFoodObject = function (food) {
 
 exports.postFood = function (req, res) {
   var food = new Food(req.body);
+  var cateGoryExists = false;
 
   Categories.find({name: food.category}).exec(function (err, cat){
     if (err)
@@ -53,37 +54,36 @@ exports.postFood = function (req, res) {
         cat.forEach(function (element) {
 
           element.subCategories.forEach(function(subCategoryListItem){
-            console.log(subCategoryListItem);
-            console.log(food.subCategory);
+            //console.log(subCategoryListItem);
+            //console.log(food.subCategory);
               console.log(subCategoryListItem==food.subCategory);
 
               if (subCategoryListItem == food.subCategory) {
-
-                food.save(function (err) {
-                  if (err) {
-                    return res.send({
-                      success: false,
-                      message: errorHandler.getErrorMessage(err)
-                    });
-                  } else {
-                    res.jsonp(
-                      {success: true,
-                        food: safeFoodObject(food)
-                      });
-                  }
-                });
-              } else {
-                res.jsonp({
-                  succes: false,
-                  message: "subcategory doesn't exists"
-                });
+                cateGoryExists = true;
               }
             }
           )
         }, this);
 
-
-
+        if(cateGoryExists){
+          food.save(function (err) {
+            if (err) {
+              return res.send({
+                success: false,
+                message: errorHandler.getErrorMessage(err)
+              });
+            } else {
+              res.jsonp(
+                {success: true,
+                  food: safeFoodObject(food)
+                });
+            }
+          });
+        }else{
+          return res.send({succes: false,
+            message: "subcategory doesn't exists"
+          });
+        }
       }
     }
   });

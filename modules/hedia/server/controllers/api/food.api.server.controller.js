@@ -45,10 +45,8 @@ exports.postFood = function (req, res) {
       });
     }
     else {
-      var subCat = [cat.subCategories];
+      var subCat = cat.subCategories[0];
       console.log(subCat);
-      console.log('-------------------------'+cat.subCategories);
-      console.log('timmy er en abe' + '-------------------' + cat);
       subCat.forEach(function (element) {
         if (element === food.subCategory) {
           food.save(function (err) {

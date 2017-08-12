@@ -6,6 +6,7 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Food = mongoose.model('Food'),
+  Categories = mongoose.model('Categories'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash'),
   validator = require('validator');
@@ -36,17 +37,42 @@ exports.postFood = function (req, res) {
   var food = new Food(req.body);
 
 
-
-  food.save(function (err) {
+  Categories.find({name: food.category}).exec(function (err, cat) {
     if (err) {
       return res.send({
         success: false,
-        message: errorHandler.getErrorMessage(err)
+        message: "category doesn't exists"
       });
-    } else {
-      res.jsonp({ success: true, food: safeFoodObject(food) });
+    }
+    else {
+      var subCat = cat.subCategory;
+      subCat.forEach(function (element) {
+        if (element === food.subCategory) {
+          food.save(function (err) {
+            if (err) {
+              return res.send({
+                success: false,
+                message: errorHandler.getErrorMessage(err)
+              });
+            } else {
+              res.jsonp({ 
+                success: true, 
+                food: safeFoodObject(food) });
+            }
+          });
+        } else {
+          res.jsonp({ 
+            succes: false, 
+            message: "subcategory doesn't exists" 
+          });
+        }
+
+      }, this);
+
     }
   });
+
+
 
 
 

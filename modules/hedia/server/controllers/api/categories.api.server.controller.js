@@ -47,7 +47,7 @@ exports.getCategories = function (req, res) {
                 else {
                   res.jsonp({success: true, categories: cat});
                 }
-             })
+             });
 
 }
 

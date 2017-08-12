@@ -35,10 +35,10 @@ var safeFoodObject = function (food) {
 
 exports.postFood = function (req, res) {
   var food = new Food(req.body);
-console.log(food.category);
-console.log(food.subCategory);
+  console.log(food.category);
+  console.log(food.subCategory);
 
-  Categories.find({name: food.category}).exec(function (err, cat) {
+  Categories.find({ name: food.category }).exec(function (err, cat) {
     if (err) {
       return res.send({
         success: false,
@@ -46,13 +46,18 @@ console.log(food.subCategory);
       });
     }
     else {
-      //var category = JSON.parse(cat);
-     // console.log(category);
-    // var subCategories = JSON.parse(category.subCategories);
-     
-      cat.forEach(function (element) {
-        console.log(element)
-        if (element === food.subCategory) {
+
+      cat.subCategories.forEach(function (element) {
+
+        console.log(element);
+
+
+
+      }, this);
+
+      /* forEach(function (element) {
+        
+        if (element.subCategories === food.subCategory) {
           food.save(function (err) {
             if (err) {
               return res.send({
@@ -72,7 +77,7 @@ console.log(food.subCategory);
           });
         }
 
-      }, this);
+      }, this); */
 
     }
   });

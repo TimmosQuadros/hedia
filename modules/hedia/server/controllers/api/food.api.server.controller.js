@@ -55,7 +55,7 @@ exports.postFood = function (req, res) {
           element.subCategories.forEach(function(subCategoryListItem){
               //console.log(subCategoryListItem);
 
-              if (subCategoryListItem == food.subCategory) {
+              if (subCategoryListItem.toString().localeCompare(food.subCategory.toString())==-1) {
 
                 food.save(function (err) {
                   if (err) {

@@ -48,7 +48,7 @@ exports.postFood = function (req, res) {
       //var subCat = cat;
       //console.log(subCat);
       cat.forEach(function (element) {
-        console.log(element.subCategories)
+        console.log(element)
         if (element.subCategories === food.subCategory) {
           food.save(function (err) {
             if (err) {

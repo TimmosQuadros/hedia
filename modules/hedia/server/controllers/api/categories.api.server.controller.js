@@ -37,18 +37,17 @@ exports.getCategories = function (req, res) {
 
   var categories = new Categories(req.body);
 
-  categories.find({}, (function (err, cat) {
-    if (err) {
-      return res.send({
-        success: false,
-        message: errorHandler.getErrorMessage(err)
-      });
-    }
-    else {
-      res.jsonp({ success: true, categories: cat });
-    }
-  })
-  )
+  categories.find().exec(function (err, cat){
+                if (err)
+                {
+                  return res.send({success: false,
+                    message: errorHandler.getErrorMessage(err)
+                  });
+                }
+                else {
+                  res.jsonp({success: true, categories: cat});
+                }
+             })
 
 }
 

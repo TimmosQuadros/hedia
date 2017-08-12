@@ -60,7 +60,7 @@ var safeCategoryObject = function (category) {
 }
 
 exports.postCategory = function(req, res) {
-  var category = new Category(req.body);
+  var category = new Categories(req.body);
   
   
   

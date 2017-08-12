@@ -53,10 +53,12 @@ exports.postFood = function (req, res) {
         cat.forEach(function (element) {
 
           element.subCategories.forEach(function(subCategoryListItem){
-              //console.log(subCategoryListItem);
+            console.log(subCategoryListItem);
+            console.log(food.subCategory);
+              console.log(subCategoryListItem==food.subCategory);
 
-              if (true) {
-// subCategoryListItem.toString().localeCompare(food.subCategory.toString())==-1
+              if (subCategoryListItem == food.subCategory) {
+
                 food.save(function (err) {
                   if (err) {
                     return res.send({

@@ -8,9 +8,9 @@ var mongoose = require('mongoose'),
 
 
 /**
- * Category Schema
+ * Categories Schema
  */
-var CategorySchema = new Schema({
+var CategoriesSchema = new Schema({
   name: {
     type: String,
     unique: true,
@@ -23,4 +23,4 @@ var CategorySchema = new Schema({
 
 
 
-mongoose.model('Category', CategorySchema);
+mongoose.model('Categories', CategoriesSchema);

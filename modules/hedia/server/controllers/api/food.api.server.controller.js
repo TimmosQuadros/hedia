@@ -6,7 +6,7 @@
 var path = require('path'),
   mongoose = require('mongoose'),
   Food = mongoose.model('Food'),
-  //Category = mongoose.model('Category'),
+  Categories = mongoose.model('Categories'),
   //subCategory = mongoose.model('SubCategory'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash'),

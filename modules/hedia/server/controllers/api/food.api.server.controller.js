@@ -36,7 +36,19 @@ var safeFoodObject = function (food) {
 exports.postFood = function (req, res) {
   var food = new Food(req.body);
 
-  Categories.find({ name: food.category }).exec(function (err, cat) {
+  Categories.find({name: food.category}).exec(function (err, cat){
+    if (err)
+    {
+      return res.send({success: false,
+        message: errorHandler.getErrorMessage(err)
+      });
+    }
+    else {
+      res.jsonp({success: true, categories: cat});
+    }
+  });
+
+  /*Categories.find({ name: food.category }).exec(function (err, cat) {
     if (err) {
       console.log("erroooooooooooooooo");
       return res.send({
@@ -47,12 +59,12 @@ exports.postFood = function (req, res) {
     else {
 
       cat.forEach(function (element) {
-        
+
         element.subCategories.forEach(function(subCategoryListItem){
           //console.log(subCategoryListItem);
 
                 if (subCategoryListItem == food.subCategory) {
-        
+
                   food.save(function (err) {
                     if (err) {
                       return res.send({
@@ -67,22 +79,22 @@ exports.postFood = function (req, res) {
                     }
                   });
                 } else {
-                  res.jsonp({ 
-                    succes: false, 
-                    message: "subcategory doesn't exists" 
+                  res.jsonp({
+                    succes: false,
+                    message: "subcategory doesn't exists"
                   });
                 }
 
         }
 
         )
-        
-        
+
+
       }, this);
 
     }
   });
-
+*/
 
 
 

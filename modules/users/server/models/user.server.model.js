@@ -167,6 +167,14 @@ var UserSchema = new Schema({
   },
   resetPasswordExpires: {
     type: Date
+  },
+  sensCorr: {
+    type: Number,
+    default: 0
+  },
+  carbonCorr: {
+    type: Number,
+    default: 0
   }
 });
 

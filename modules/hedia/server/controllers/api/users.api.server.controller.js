@@ -28,7 +28,10 @@ var safeUserObject = function(user){
             threeKStepPersent: user.threeKStepPersent,
             sixKStepPersent: user.sixKStepPersent,
             timeForAction: user.timeForAction,
-            glucoseIncrease: user.glucoseIncrease
+            glucoseIncrease: user.glucoseIncrease,
+            sensCorr: user.sensCorr,
+            carbonCorr: user.carbonCorr
+
          };
 }
 

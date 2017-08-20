@@ -17,6 +17,11 @@ var FoodSchema = new Schema({
         trim: true,
         lowercase: true
     },
+    isbn: {
+      type: String,
+      unique: 'Barcode already exists',
+      trim: true
+    },
     energy: {
         type: Number,
         default: 0
@@ -77,7 +82,7 @@ var FoodSchema = new Schema({
     subCategory: {
         type: String,
     }
- 
+
 });
 
 mongoose.model('Food', FoodSchema);

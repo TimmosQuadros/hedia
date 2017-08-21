@@ -96,7 +96,7 @@ exports.getBarcode = function (req, res, next) {
   console.log(req.query.barcode);
 
   Food.find({ 'barcode': req.query.barcode }).exec(function (err, found_barcode) {
-
+console.log(found_barcode);
     if (err) {
       return res.send({
         success: false,

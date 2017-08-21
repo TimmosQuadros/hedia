@@ -93,7 +93,7 @@ exports.postFood = function (req, res) {
 
 exports.getBarcode = function (req, res, next) {
 
-   
+
   /* var db = req.db.get,
         collection = db.get('foods');
         collection.find
@@ -101,20 +101,20 @@ exports.getBarcode = function (req, res, next) {
   var barcode = req.query.barcode;
   console.log("this was the parameter given: " + barcode)
 
- 
+
   Food.findOne({ 'barcode': barcode }).exec(function (err, found_barcode) {
-       if (!found_barcode) {
-    return res.send({
-      succes: false,
-      message: errorHandler.getErrorMessage(err)
-    });
-  }  
-    
+    if (!found_barcode.length) {
+      return res.send({
+        succes: false,
+        message: errorHandler.getErrorMessage(err)
+      });
+    }
+
     console.log("value of found_barcode" + found_barcode)
     if (err) { return next(err); }
     else if (found_barcode) { res.jsonp(found_barcode); }
-  });  
+  });
 
-//res.jsonp({success: true});
+  //res.jsonp({success: true});
 
 };

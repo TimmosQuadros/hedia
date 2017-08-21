@@ -102,8 +102,9 @@ exports.getBarcode = function (req, res, next) {
   console.log("this was the parameter given: " + barcode)
 
 
-  Food.findOne({ 'barcode': barcode }).exec(function (err, found_barcode) {
-    if (found_barcode === null) {
+  Food.find({ 'barcode': barcode }).exec(function (err, found_barcode) {
+    if (!found_barcode) {
+    console.log("inside if WE got here!");
       return res.send({
         succes: false,
         message: errorHandler.getErrorMessage(err)

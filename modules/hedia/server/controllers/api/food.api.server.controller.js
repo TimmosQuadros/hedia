@@ -96,19 +96,24 @@ exports.getBarcode = function (req, res, next) {
   console.log(req.query.barcode);
 
   Food.find({ 'barcode': req.query.barcode }).exec(function (err, found_barcode) {
-    
-    if (err) { return next(err); }
 
-    if (!found_barcode.length) {
+    if (err) {
+      return res.send({
+        success: false,
+        message: errorHandler.getErrorMessage(err)
+      });
+    }
+
+    else if (!found_barcode.length) {
       return res.jsonp({
         succes: false,
         message: "no food with that barcode in food db"
       });
-    }else if (found_barcode) { 
-      res.jsonp(found_barcode); 
+    } else {
+      res.jsonp(found_barcode);
     }
   });
 
-  
+
 };
 

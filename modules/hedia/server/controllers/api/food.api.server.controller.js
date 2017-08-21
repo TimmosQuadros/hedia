@@ -38,35 +38,34 @@ exports.postFood = function (req, res) {
   var food = new Food(req.body);
   var cateGoryExists = false;
 
-  Categories.find({name: food.category}).exec(function (err, cat){
-    if (err)
-    {
-      return res.send({success: false,
+  Categories.find({ name: food.category }).exec(function (err, cat) {
+    if (err) {
+      return res.send({
+        success: false,
         message: errorHandler.getErrorMessage(err)
       });
     }
     else {
-      if(cat.length<1){
-        return res.send({succes: false,
+      if (cat.length < 1) {
+        return res.send({
+          succes: false,
           message: "category doesn't exists"
         });
-      }else{
+      } else {
 
         cat.forEach(function (element) {
 
-          element.subCategories.forEach(function(subCategoryListItem){
-            //console.log(subCategoryListItem);
-            //console.log(food.subCategory);
-              console.log(subCategoryListItem==food.subCategory);
+          element.subCategories.forEach(function (subCategoryListItem) {
+            console.log(subCategoryListItem == food.subCategory);
 
-              if (subCategoryListItem == food.subCategory) {
-                cateGoryExists = true;
-              }
+            if (subCategoryListItem == food.subCategory) {
+              cateGoryExists = true;
             }
+          }
           )
         }, this);
 
-        if(cateGoryExists){
+        if (cateGoryExists) {
           food.save(function (err) {
             if (err) {
               return res.send({
@@ -75,13 +74,15 @@ exports.postFood = function (req, res) {
               });
             } else {
               res.jsonp(
-                {success: true,
+                {
+                  success: true,
                   food: safeFoodObject(food)
                 });
             }
           });
-        }else{
-          return res.send({succes: false,
+        } else {
+          return res.send({
+            succes: false,
             message: "subcategory doesn't exists"
           });
         }

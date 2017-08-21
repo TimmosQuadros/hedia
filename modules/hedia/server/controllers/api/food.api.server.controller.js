@@ -101,13 +101,15 @@ exports.getBarcode = function (req, res, next) {
   var barcode = req.query.barcode;
   console.log("this was the parameter given: " + barcode)
 
-  /*  if (!barcode) {
+ 
+  Food.findOne({ 'barcode': barcode }).exec(function (err, found_barcode) {
+       if (!found_barcode) {
     return res.send({
       succes: false,
       message: errorHandler.getErrorMessage(err)
     });
-  }  */
-  Food.findOne({ 'barcode': barcode }).exec(function (err, found_barcode) {
+  }  
+    
     console.log("value of found_barcode" + found_barcode)
     if (err) { return next(err); }
     else if (found_barcode) { res.jsonp(found_barcode); }

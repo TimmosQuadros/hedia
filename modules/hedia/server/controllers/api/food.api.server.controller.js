@@ -104,8 +104,8 @@ exports.getBarcode = function (req, res, next) {
 
   Food.find({ 'barcode': barcode }).exec(function (err, found_barcode) {
     if (!found_barcode.length) {
-    console.log("inside if WE got here!");
-      return res.send({
+//    console.log("inside if WE got here!");
+      return res.jsonp({
         succes: false,
         message: errorHandler.getErrorMessage(err)
       });

@@ -103,7 +103,7 @@ exports.getBarcode = function (req, res, next) {
 
 
   Food.findOne({ 'barcode': barcode }).exec(function (err, found_barcode) {
-    if (!found_barcode || found_barcode === null) {
+    if (found_barcode === null) {
       return res.send({
         succes: false,
         message: errorHandler.getErrorMessage(err)

@@ -17,12 +17,6 @@ var FoodSchema = new Schema({
         trim: true,
         lowercase: true
     },
-    isbn: {
-      type: String,
-      unique: 'barcode already exists',
-      trim: true,
-      default: ""
-    },
     energy: {
         type: Number,
         default: 0

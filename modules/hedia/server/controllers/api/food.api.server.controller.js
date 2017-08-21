@@ -93,29 +93,22 @@ exports.postFood = function (req, res) {
 
 exports.getBarcode = function (req, res, next) {
 
-
-  /* var db = req.db.get,
-        collection = db.get('foods');
-        collection.find
-   */
-  //var barcode = req.query.barcode;
-  console.log("this was the parameter given: " + req.query.barcode)
-
+  console.log(req.query.barcode);
 
   Food.find({ 'barcode': req.query.barcode }).exec(function (err, found_barcode) {
+    
+    if (err) { return next(err); }
+
     if (!found_barcode.length) {
-//    console.log("inside if WE got here!");
       return res.jsonp({
         succes: false,
-        message: "Du er en ABE fiks det!"
+        message: "no food with that barcode in food db"
       });
+    }else if (found_barcode) { 
+      res.jsonp(found_barcode); 
     }
-
-    console.log("value of found_barcode" + found_barcode)
-    if (err) { return next(err); }
-    else if (found_barcode) { res.jsonp(found_barcode); }
   });
 
-  //res.jsonp({success: true});
-
+  
 };
+

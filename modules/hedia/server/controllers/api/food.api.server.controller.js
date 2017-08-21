@@ -14,6 +14,7 @@ var path = require('path'),
 var safeFoodObject = function (food) {
   return {
     title: food.title,
+    isbn: isbn.title,
     energy: food.energy,
     proteins: food.proteins,
     carbonhydrates: food.carbonhydrates,

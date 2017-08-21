@@ -97,7 +97,7 @@ exports.getBarcode = function (req, res, next) {
 if(!req.query.barcode){
   return res.jsonp({
     success: false,
-    message: "missing parameter, nothing to search for"
+    message: "parameter not recognized, nothing to search for"
   });
 
 }

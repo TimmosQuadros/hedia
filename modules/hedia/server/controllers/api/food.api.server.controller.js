@@ -14,6 +14,7 @@ var path = require('path'),
 var safeFoodObject = function (food) {
   return {
     title: food.title,
+    barcode: food.barcode,
     energy: food.energy,
     proteins: food.proteins,
     carbonhydrates: food.carbonhydrates,
@@ -87,5 +88,18 @@ exports.postFood = function (req, res) {
         }
       }
     }
+  });
+};
+
+exports.getBarcode = function (req, res, next) {
+
+  var barcode = req.params.barcode;
+  console.log("this was the parameter given: " + barcode)
+
+
+  Food.findOne({ 'barcode': barcode }).exec(function (err, found_barcode) {
+    console.log("value of found_barcode" + found_barcode)
+    if (err) { return next(err); }
+    if (found_barcode) { res.jsonp(found_barcode); }
   });
 };

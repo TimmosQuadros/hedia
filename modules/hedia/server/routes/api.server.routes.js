@@ -40,5 +40,8 @@ module.exports = function(app) {
   app.route('/api/v1/post-food').post([reqServ.checkJsonHeader, authServ.authByToken], apiController.postFood);
   app.route('/api/v1/post-category').post([reqServ.checkJsonHeader, authServ.authByToken], apiController.postCategory);
   app.route('/api/v1/get-categories').get( authServ.authByToken, apiController.getCategories);
+  //barcode 
+  app.route('/api/v1/get-barcodes').get( authServ.authByToken, apiController.getBarcodes);
+
 };
 

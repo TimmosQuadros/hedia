@@ -16,6 +16,10 @@ var FoodSchema = new Schema({
         unique: 'title already exists',
         trim: true,
         lowercase: true
+    },barcode: {
+        type: String,
+        unique: '',
+        trim: true
     },
     energy: {
         type: Number,

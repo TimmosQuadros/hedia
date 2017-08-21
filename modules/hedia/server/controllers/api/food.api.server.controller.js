@@ -93,7 +93,7 @@ exports.postFood = function (req, res) {
 
 exports.getBarcode = function (req, res, next) {
 
-  var barcode = req.params.barcode;
+  var barcode = req.param.barcode;
   console.log("this was the parameter given: " + barcode)
 
   if (!barcode) {

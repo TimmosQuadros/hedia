@@ -30,7 +30,8 @@ var safeUserObject = function(user){
             timeForAction: user.timeForAction,
             glucoseIncrease: user.glucoseIncrease,
             sensCorr: user.sensCorr,
-            carbonCorr: user.carbonCorr
+            carbonCorr: user.carbonCorr,
+            changedParameter: user.changedParameter
 
          };
 }

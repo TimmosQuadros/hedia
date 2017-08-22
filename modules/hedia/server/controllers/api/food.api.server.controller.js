@@ -94,8 +94,17 @@ exports.postFood = function (req, res) {
 exports.getBarcode = function (req, res, next) {
 
   console.log(req.query.barcode);
+if(!req.query.barcode){
+  return res.jsonp({
+    success: false,
+    message: "parameter not recognized, nothing to search for"
+  });
 
-  Food.find({ 'barcode': req.query.barcode }).exec(function (err, found_barcode) {
+}
+
+
+  Food.find({ 'barcode': req.query.barcode }).exec(function (err, food) {
+
 
     if (err) {
       return res.send({
@@ -104,9 +113,9 @@ exports.getBarcode = function (req, res, next) {
       });
     }
 
-    else if (!found_barcode.length) {
+    else if (!food.length) {
       return res.jsonp({
-        succes: false,
+        success: false,
         message: "no food with that barcode in food db"
       });
     } else {

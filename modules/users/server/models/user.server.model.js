@@ -72,6 +72,10 @@ var UserSchema = new Schema({
     type: String,
     trim: true
   },
+  changedParameter: {
+    type: Boolean,
+    default: false
+  },
   email: {
     type: String,
     index: {

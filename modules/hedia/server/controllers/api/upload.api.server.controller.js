@@ -20,7 +20,7 @@ exports.uploadImage = function(req, res) {
   var upload = multer(config.uploads.profileUpload).single('newProfilePicture');
   var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
   var existingImageUrl;
-  console.log("text: "+req);
+  console.log("text: "+upload);
 
   // Filtering to upload only images
   upload.fileFilter = profileUploadFileFilter;

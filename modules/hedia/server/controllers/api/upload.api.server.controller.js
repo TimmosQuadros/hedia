@@ -17,7 +17,7 @@ var _ = require('lodash'),
 
 exports.uploadImage = function(req, res) {
   var user = req.user;
-  console.log(user.toString());
+  console.log("text: "+user.profileImageURL);
   var upload = multer(config.uploads.profileUpload).single('newProfilePicture');
   var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
   var existingImageUrl;

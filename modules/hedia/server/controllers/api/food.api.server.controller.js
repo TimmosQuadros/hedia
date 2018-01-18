@@ -91,19 +91,38 @@ exports.postFood = function (req, res) {
   });
 };
 
+exports.foodByBarcode = function(req, res, next) {
+
+  var barcode = req.params.barcode;
+
+  Food.findOne({barcode: barcode}).exec(function (err, food) {
+    if (err) {
+      return next(err);
+    } else if (!food) {
+      return res.status(404).send({success: false,
+        message: 'No food with that barcode has been found'
+      });
+    }
+    req.food = food;
+    next();
+  });
+
+};
+
 exports.getBarcode = function (req, res, next) {
 
-  console.log(req.query.barcode);
-if(!req.query.barcode){
+if(!req.food){
   return res.jsonp({
     success: false,
     message: "parameter not recognized, nothing to search for"
   });
 
+}else{
+  res.jsonp(req.food);
 }
 
 
-  Food.find({ 'barcode': req.query.barcode }).exec(function (err, food) {
+  /*Food.find({ 'barcode': req.query.barcode }).exec(function (err, food) {
 
 
     if (err) {
@@ -121,8 +140,6 @@ if(!req.query.barcode){
     } else {
       res.jsonp(found_barcode);
     }
-  });
-
-
+  });*/
 };
 

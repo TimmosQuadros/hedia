@@ -40,8 +40,8 @@ module.exports = function(app) {
   app.route('/api/v1/post-food').post([reqServ.checkJsonHeader, authServ.authByToken], apiController.postFood);
   app.route('/api/v1/post-category').post([reqServ.checkJsonHeader, authServ.authByToken], apiController.postCategory);
   app.route('/api/v1/get-categories').get( authServ.authByToken, apiController.getCategories);
-  //barcode 
-  app.route('/api/v1/get-barcode').get( authServ.authByToken, apiController.getBarcode);
+  //barcode
+  app.route('/api/v1/get-barcode/:barcode').get( [authServ.authByToken, apiController.foodByBarcode], apiController.getBarcode);
 
 };
 

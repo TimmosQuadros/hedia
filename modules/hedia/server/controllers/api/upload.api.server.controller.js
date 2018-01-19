@@ -12,7 +12,7 @@ var _ = require('lodash'),
   multer = require('multer'),
   config = require(path.resolve('./config/config')),
   User = mongoose.model('User'),
-  Food = mongoose.model('User'),
+  Food = mongoose.model('Food'),
   validator = require('validator');
 
 
@@ -95,7 +95,7 @@ exports.uploadFoodImage = function(req, res) {
   var upload = multer(config.uploads.foodUpload).single('newFoodPicture');
   var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
   var existingImageFoodUrl;
-  console.log("Food: " +JSON.stringify(req.get("food")));
+  console.log("Food: " +food);
   //console.log("text: "+upload);
 
   // Filtering to upload only images

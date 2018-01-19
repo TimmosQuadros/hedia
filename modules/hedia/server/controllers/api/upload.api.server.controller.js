@@ -131,7 +131,7 @@ exports.uploadFoodImage = function(req, res) {
 
   function updateFood () {
     return new Promise(function (resolve, reject) {
-      food.productImageURL = config.uploads.foodUpload.dest + req.file.filename;
+      food.productImageURL = config.uploads.foodUpload.dest + req.body.title;
       food.save(function (err, thefood) {
         if (err) {
           reject(err);

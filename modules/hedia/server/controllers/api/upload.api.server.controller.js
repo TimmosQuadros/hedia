@@ -95,7 +95,7 @@ exports.uploadFoodImage = function(req, res) {
   var upload = multer(config.uploads.foodUpload).single('newFoodPicture');
   var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
   var existingImageFoodUrl;
-  console.log("Food: "+req);
+  console.log("Food: " +food);
   //console.log("text: "+upload);
 
   // Filtering to upload only images

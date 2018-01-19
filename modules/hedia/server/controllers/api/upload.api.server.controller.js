@@ -104,6 +104,7 @@ exports.uploadFoodImage = function(req, res) {
   if (food) {
     existingImageFoodUrl = food.productImageURL;
     uploadImage()
+      .then(updateFood())
       .then(function () {
         res.jsonp({success: true, image_url:  food.productImageURL});
       })

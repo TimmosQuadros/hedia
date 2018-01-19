@@ -77,9 +77,10 @@ var FoodSchema = new Schema({
     },
     category: {
         type: String,
+        unique: true
     },
     subCategory: {
-        type: String,
+        type: String
     }
 
 });

@@ -51,6 +51,12 @@ module.exports = {
       limits: {
         fileSize: 7 * 1024 * 1024 // Max file size in bytes (1 MB)
       }
+    },
+    foodUpload: {
+      dest: './modules/food/client/img/food/', // Food upload destination path
+      limits: {
+        fileSize: (7 * 1024 * 1024) // Max file size in bytes (1 MB)
+      }
     }
   },
   shared: {

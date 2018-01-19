@@ -12,6 +12,7 @@ var _ = require('lodash'),
   multer = require('multer'),
   config = require(path.resolve('./config/config')),
   User = mongoose.model('User'),
+  Food = mongoose.model('User'),
   validator = require('validator');
 
 
@@ -70,6 +71,79 @@ exports.uploadImage = function(req, res) {
   function deleteOldImage () {
     return new Promise(function (resolve, reject) {
       if (existingImageUrl !== User.schema.path('profileImageURL').defaultValue) {
+        fs.unlink(existingImageUrl, function (unlinkError) {
+          if (unlinkError) {
+            console.log(unlinkError);
+            reject({success: false,
+              message: 'Error occurred while deleting old profile picture'
+            });
+          } else {
+            resolve();
+          }
+        });
+      } else {
+        resolve();
+      }
+    });
+  }
+};
+
+
+//************startOfFood******************
+exports.uploadFoodImage = function(req, res) {
+  var food = req.food;
+  var upload = multer(config.uploads.foodUpload).single('newFoodPicture');
+  var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
+  var existingImageFoodUrl;
+  console.log("text: "+upload);
+
+  // Filtering to upload only images
+  upload.fileFilter = profileUploadFileFilter;
+
+  if (food) {
+    existingImageFoodUrl = food.productImageURL;
+    uploadImage()
+      .then(updateFood)
+      .then(function () {
+        res.jsonp({success: true, image_url:  food.productImageURL});
+      })
+      .catch(function (err) {
+        res.send({success: false, message: err});
+      });
+  } else {
+    res.send({success: false,
+      message: 'No food selected'
+    });
+  }
+
+  function uploadImage () {
+    return new Promise(function (resolve, reject) {
+      upload(req, res, function (uploadError) {
+        if (uploadError) {
+          reject(errorHandler.getErrorMessage(uploadError));
+        } else {
+          resolve();
+        }
+      });
+    });
+  }
+
+  function updateFood () {
+    return new Promise(function (resolve, reject) {
+      food.productImageURL = config.uploads.foodUpload.dest + req.file.filename;
+      food.save(function (err, thefood) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
+      });
+    });
+  }
+
+  function deleteOldImage () {
+    return new Promise(function (resolve, reject) {
+      if (existingImageUrl !== Food.schema.path('profileImageURL').defaultValue) {
         fs.unlink(existingImageUrl, function (unlinkError) {
           if (unlinkError) {
             console.log(unlinkError);

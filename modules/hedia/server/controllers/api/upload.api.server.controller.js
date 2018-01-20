@@ -89,77 +89,15 @@ exports.uploadImage = function(req, res, next) {
 };
 
 
-//************startOfFood******************
-exports.uploadFoodImage = function(req, res, next) {
-  var food = req.body.food;
-  console.log(food)
-  var upload = multer(config.uploads.foodUpload).single('newFoodPicture');
-  var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
-  var existingImageFoodUrl;
+exports.uploadFoodImage = function(req, res) {
 
-  // Filtering to upload only images
-  upload.fileFilter = profileUploadFileFilter;
+  var uploadFile = multer({ dest: './modules/food/client/img/food/'}).single('foodImg')
 
-  if (food) {
-    existingImageFoodUrl = food.productImageURL;
-    console.log("her skal den skrive standard url på food", existingImageFoodUrl)
-    uploadImage()
-      .then(updateFood)
-      .then(deleteOldFoodImage)
-      .then(function () {
-        res.jsonp({success: true, image_url:  food.productImageURL});
-      })
-      .catch(function (err) {
-        res.send({success: false, message: err});
-      });
-  } else {
-    res.send({success: false,
-      message: 'No food selected'
-    });
-  }
-
-  function uploadImage () {
-    return new Promise(function (resolve, reject) {
-      upload(req, res, function (uploadError) {
-        if (uploadError) {
-          reject(errorHandler.getErrorMessage(uploadError));
-        } else {
-          console.log(resolve);
-          resolve();
-        }
-      });
-    });
-  }
-
-  function updateFood () {
-    return new Promise(function (resolve, reject) {
-      food.productImageURL = config.uploads.foodUpload.dest + req.body.food.title;
-      food.save(function (err, thefood) {
-        if (err) {
-          reject(err);
-        } else {
-          resolve();
-        }
-      });
-    });
-  }
-
-  function deleteOldFoodImage () {
-    return new Promise(function (resolve, reject) {
-      if (existingImageUrl !== Food.schema.path('productImageURL').defaultValue) {
-        fs.unlink(existingImageUrl, function (unlinkError) {
-          if (unlinkError) {
-            console.log(unlinkError);
-            reject({success: false,
-              message: 'Error occurred while deleting old food picture'
-            });
-          } else {
-            resolve();
-          }
-        });
-      } else {
-        resolve();
-      }
-    });
-  }
-};
+  uploadFile(req, res, function (uploadError) {
+    if (uploadError) {
+      reject(errorHandler.getErrorMessage(uploadError));
+    } else {
+      res.status(204).end();
+    }
+  });
+}

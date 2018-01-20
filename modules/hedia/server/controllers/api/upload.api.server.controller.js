@@ -16,7 +16,7 @@ var _ = require('lodash'),
   validator = require('validator');
 
 
-exports.uploadImage = function(req, res) {
+exports.uploadImage = function(req, res, next) {
   var user = req.user;
   var upload = multer(config.uploads.profileUpload).single('newProfilePicture');
   var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
@@ -90,13 +90,16 @@ exports.uploadImage = function(req, res) {
 
 
 //************startOfFood******************
-exports.uploadFoodImage = function(req, res) {
-  var food = new Food(req.body);
+exports.uploadFoodImage = function(req, res, next) {
+  var food = req.body.food;
+  //var upload = multer ({storage: storage});
+  //upload.single('foodImage')
   var upload = multer(config.uploads.foodUpload).single('newFoodPicture');
   var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
   var existingImageFoodUrl;
   //console.log("Food: " +JSON.stringify(req.body.food));
-  console.log("text: "+upload);
+  console.log("text: "+req.file);
+  console.log("textabe: "+req.body.food.title);
 
   // Filtering to upload only images
   upload.fileFilter = profileUploadFileFilter;
@@ -120,8 +123,10 @@ exports.uploadFoodImage = function(req, res) {
     return new Promise(function (resolve, reject) {
       upload(req, res, function (uploadError) {
         if (uploadError) {
+          //console.log(errorHandler.getErrorMessage(uploadError));
           reject(errorHandler.getErrorMessage(uploadError));
         } else {
+          console.log(resolve);
           resolve();
         }
       });

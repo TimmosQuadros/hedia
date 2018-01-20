@@ -101,7 +101,7 @@ exports.uploadFoodImage =  function(req, res) {
     filename: function (req, file, callback) {
       
   
-  
+  console.log(callback)
   
       crypto.pseudoRandomBytes(8, function(err, raw) {
         if (err) return callback(err);
@@ -125,9 +125,9 @@ exports.uploadFoodImage =  function(req, res) {
     res.end("File is uploaded");
     //console.log(file)
   console.log(req)
-  console.log(callback)
+ 
   console.log(storage)
-  console.log(file)
+  
 });
 
  

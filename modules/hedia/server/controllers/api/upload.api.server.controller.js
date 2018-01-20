@@ -13,7 +13,8 @@ var _ = require('lodash'),
   config = require(path.resolve('./config/config')),
   User = mongoose.model('User'),
   Food = mongoose.model('Food'),
-  validator = require('validator');
+  validator = require('validator'),
+  crypto = require('crypto');
 
 
 exports.uploadImage = function(req, res, next) {
@@ -93,7 +94,7 @@ exports.uploadImage = function(req, res, next) {
 
 
 
-exports.uploadFoodImage = upload.single('image'),function(req, res) {
+exports.uploadFoodImage = function(req, res) {
 
 
   var storage = multer.diskStorage({
@@ -109,20 +110,26 @@ exports.uploadFoodImage = upload.single('image'),function(req, res) {
     }
   });
   
-  var upload = multer({storage: storage});
+  var upload = multer({storage: storage}).single('image');
 
-  if (!req.file) {
-    console.log("No file received");
-    return res.send({
-      success: false
-    });
+ 
+  upload(req, res, function () {
+    if (!req.file) {
+      console.log("No file received");
+      return res.send({
+        success: false
+      });
+  
+    } else {
+      console.log('file received');
+      return res.send({
+        success: true
+      })
+    }
+  
+  });
 
-  } else {
-    console.log('file received');
-    return res.send({
-      success: true
-    })
-  }
 
+  
 };
 

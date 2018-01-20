@@ -89,21 +89,24 @@ exports.uploadImage = function(req, res, next) {
 };
 
 
+var storage = multer.diskStorage({
+  destination:'./modules/food/client/img/food/',
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() +
+    path.extname(file.originalname));
+  }
+});
+
 exports.uploadFoodImage = function(req, res) {
 
-  var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, './modules/food/client/img/food/')
-    },
-    filename: function (req, file, cb) {
-      cb(null, file.fieldname + '-' + Date.now())
-    }
-  })
+ 
 
   var uploadFile = multer({ storage: storage}).single('foodImg')
 
   uploadFile(req, res, function (uploadError) {
     if (uploadError) {
+      res.send({success: false, message: uploadError});
+     
      // reject(errorHandler.getErrorMessage(uploadError));
     } else {
       res.status(204).end();

@@ -93,39 +93,25 @@ exports.uploadImage = function(req, res, next) {
 
 exports.uploadFoodImage = function(req, res) {
 
+
+  var storage =   multer.diskStorage({
+    destination: function (req, file, callback) {
+      callback(null, './modules/food/client/img/food/');
+    },
+    filename: function (req, file, callback) {
+      callback(null, file.fieldname);
+    }
+  });
+
+  console.log(file)
+
+  var upload = multer({ storage : storage}).single('image');
  
-  var uploadFile = multer({
-    dest:'./modules/food/client/img/food/', 
-    limits: {fileSize: 10000000, files: 1},
-    fileFilter:  function(req, file, callback) {
-    
-      console.log(req.files)
-      
-        if (!file.originalname.match(/\.(jpg|jpeg)$/)) {
-
-            return callback(new Error('Only Images are allowed !'), false)
-        }
-
-        callback(null, true);
+  upload(req,res,function(err) {
+    if(err) {
+        return res.end("Error uploading file.");
     }
-}).single('image')
+    res.end("File is uploaded");
+});
+}; 
 
-
-
-
-   uploadFile(req, res, function (uploadError) {
-    if (uploadError) {
-     
-      res.status(400).json({message: uploadError.message})
-
-     
-     
-    } else {
-      // var path = '/modules/food/client/img/food/';
-     // res.status(200).json({message: 'Image Uploaded Successfully !', path: path})
-      res.status(200).json({message: 'Image Uploaded Successfully !'})
-      
-    }
-  }); 
-
-}

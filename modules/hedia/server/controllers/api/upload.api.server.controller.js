@@ -89,27 +89,37 @@ exports.uploadImage = function(req, res, next) {
 };
 
 
-var storage = multer.diskStorage({
-  destination:'./modules/food/client/img/food/',
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now() +
-    path.extname(file.originalname));
-  }
-});
+
 
 exports.uploadFoodImage = function(req, res) {
 
- 
+  var upload = multer({
+    dest:'./modules/food/client/img/food/', 
+    limits: {fileSize: 10000000, files: 1},
+    fileFilter:  function(req, file, callback) {
+    
+        if (!file.originalname.match(/\.(jpg|jpeg)$/)) {
 
-  var uploadFile = multer({ storage: storage}).single('foodImg')
+            return callback(new Error('Only Images are allowed !'), false)
+        }
+
+        callback(null, true);
+    }
+}).single('image')
+
+
+
 
   uploadFile(req, res, function (uploadError) {
     if (uploadError) {
-      res.send({success: false, message: uploadError});
      
-     // reject(errorHandler.getErrorMessage(uploadError));
+      res.status(400).json({message: uploadError.message})
+
+     
+     
     } else {
-      res.status(204).end();
+      let path = `/images/${req.file.filename}`
+      res.status(200).json({message: 'Image Uploaded Successfully !', path: path})
     }
   });
 }

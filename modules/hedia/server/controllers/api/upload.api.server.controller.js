@@ -112,6 +112,7 @@ exports.uploadFoodImage = function(req, res) {
         return res.end("Error uploading file.");
     }
     res.end("File is uploaded");
+    res.send(files)
 });
 }; 
 

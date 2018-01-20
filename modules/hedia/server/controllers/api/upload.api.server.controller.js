@@ -118,8 +118,10 @@ console.log(req)
      
      
     } else {
-      var path = '/modules/food/client/img/food/${req.file.filename}';
-      res.status(200).json({message: 'Image Uploaded Successfully !', path: path})
+      // var path = '/modules/food/client/img/food/';
+     // res.status(200).json({message: 'Image Uploaded Successfully !', path: path})
+      res.status(200).json({message: 'Image Uploaded Successfully !'})
+      
     }
   });
 }

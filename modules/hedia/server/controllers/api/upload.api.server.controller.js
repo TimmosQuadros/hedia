@@ -123,7 +123,7 @@ exports.uploadFoodImage =  function(req, res) {
         return res.end("Error uploading file.");
     }
     res.end("File is uploaded");
-    console.log(file)
+    //console.log(file)
   console.log(req)
   console.log(callback)
   console.log(storage)

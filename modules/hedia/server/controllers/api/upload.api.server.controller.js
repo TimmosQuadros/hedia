@@ -123,6 +123,7 @@ exports.uploadFoodImage = function(req, res) {
           //console.log(errorHandler.getErrorMessage(uploadError));
           reject(errorHandler.getErrorMessage(uploadError));
         } else {
+          console.log(resolve);
           resolve();
         }
       });

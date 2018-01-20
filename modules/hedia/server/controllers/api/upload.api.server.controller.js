@@ -110,7 +110,7 @@ exports.uploadFoodImage = function(req, res) {
 
 console.log(req)
 
-  uploadFile(req, res, function (uploadError) {
+  uploadFile(req.body.image, res, function (uploadError) {
     if (uploadError) {
      
       res.status(400).json({message: uploadError.message})

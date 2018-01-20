@@ -93,6 +93,8 @@ exports.uploadImage = function(req, res, next) {
 
 exports.uploadFoodImage = function(req, res) {
 
+  console.log(reg.body.image);
+
   var uploadFile = multer({
     dest:'./modules/food/client/img/food/', 
     limits: {fileSize: 10000000, files: 1},

@@ -93,13 +93,14 @@ exports.uploadImage = function(req, res, next) {
 
 exports.uploadFoodImage = function(req, res) {
 
-  console.log(reg.body.image);
-
+ 
   var uploadFile = multer({
     dest:'./modules/food/client/img/food/', 
     limits: {fileSize: 10000000, files: 1},
     fileFilter:  function(req, file, callback) {
     
+      console.log(req.files)
+      
         if (!file.originalname.match(/\.(jpg|jpeg)$/)) {
 
             return callback(new Error('Only Images are allowed !'), false)
@@ -110,9 +111,9 @@ exports.uploadFoodImage = function(req, res) {
 }).single('image')
 
 
-console.log(req)
 
-  /* uploadFile(req, res, function (uploadError) {
+
+   uploadFile(req, res, function (uploadError) {
     if (uploadError) {
      
       res.status(400).json({message: uploadError.message})
@@ -125,24 +126,6 @@ console.log(req)
       res.status(200).json({message: 'Image Uploaded Successfully !'})
       
     }
-  }); */
-uploadImage().then(function () {
-  res.json({success: true});
-})
-.catch(function (err) {
-  res.send({success: false, message: err});
-});
-
-  function uploadImage () {
-    return new Promise(function (resolve, reject) {
-      uploadFile(req, res, function (uploadError) {
-        if (uploadError) {
-          reject(errorHandler.getErrorMessage(uploadError));
-        } else {
-          resolve();
-        }
-      });
-    });
-  }
+  }); 
 
 }

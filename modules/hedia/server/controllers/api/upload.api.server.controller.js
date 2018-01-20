@@ -91,7 +91,7 @@ exports.uploadImage = function(req, res) {
 
 //************startOfFood******************
 exports.uploadFoodImage = function(req, res) {
-  var food = req.body.food;
+  var food = new Food(req.body);
   var upload = multer(config.uploads.foodUpload).single('newFoodPicture');
   var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
   var existingImageFoodUrl;

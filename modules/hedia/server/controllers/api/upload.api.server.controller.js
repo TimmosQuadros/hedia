@@ -91,11 +91,20 @@ exports.uploadImage = function(req, res, next) {
 
 exports.uploadFoodImage = function(req, res) {
 
-  var uploadFile = multer({ dest: './modules/food/client/img/food/'}).single('foodImg')
+  var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './modules/food/client/img/food/')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.fieldname + '-' + Date.now())
+    }
+  })
+
+  var uploadFile = multer({ storage: storage}).single('foodImg')
 
   uploadFile(req, res, function (uploadError) {
     if (uploadError) {
-      reject(errorHandler.getErrorMessage(uploadError));
+     // reject(errorHandler.getErrorMessage(uploadError));
     } else {
       res.status(204).end();
     }

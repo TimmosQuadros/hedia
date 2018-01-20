@@ -118,7 +118,7 @@ exports.uploadFoodImage = function(req, res) {
      
      
     } else {
-      var path = '/images/${req.file.filename}';
+      var path = '/modules/food/client/img/food/${req.file.filename}';
       res.status(200).json({message: 'Image Uploaded Successfully !', path: path})
     }
   });

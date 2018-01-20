@@ -92,14 +92,9 @@ exports.uploadImage = function(req, res, next) {
 //************startOfFood******************
 exports.uploadFoodImage = function(req, res, next) {
   var food = req.body.food;
-  //var upload = multer ({storage: storage});
-  //upload.single('foodImage')
   var upload = multer(config.uploads.foodUpload).single('newFoodPicture');
   var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
   var existingImageFoodUrl;
-  //console.log("Food: " +JSON.stringify(req.body.food));
-  console.log("text: "+req.file);
-  console.log("textabe: "+req.body.food.title);
 
   // Filtering to upload only images
   upload.fileFilter = profileUploadFileFilter;
@@ -107,6 +102,8 @@ exports.uploadFoodImage = function(req, res, next) {
   if (food) {
     existingImageFoodUrl = food.productImageURL;
     uploadImage()
+      .then(updateFood)
+      .then(deleteOldFoodImage)
       .then(function () {
         res.jsonp({success: true, image_url:  food.productImageURL});
       })
@@ -123,7 +120,6 @@ exports.uploadFoodImage = function(req, res, next) {
     return new Promise(function (resolve, reject) {
       upload(req, res, function (uploadError) {
         if (uploadError) {
-          //console.log(errorHandler.getErrorMessage(uploadError));
           reject(errorHandler.getErrorMessage(uploadError));
         } else {
           console.log(resolve);
@@ -135,7 +131,7 @@ exports.uploadFoodImage = function(req, res, next) {
 
   function updateFood () {
     return new Promise(function (resolve, reject) {
-      food.productImageURL = config.uploads.foodUpload.dest + req.body.title;
+      food.productImageURL = config.uploads.foodUpload.dest + req.body.food.title;
       food.save(function (err, thefood) {
         if (err) {
           reject(err);
@@ -146,14 +142,14 @@ exports.uploadFoodImage = function(req, res, next) {
     });
   }
 
-  function deleteOldImage () {
+  function deleteOldFoodImage () {
     return new Promise(function (resolve, reject) {
-      if (existingImageUrl !== Food.schema.path('profileImageURL').defaultValue) {
+      if (existingImageUrl !== Food.schema.path('productImageURL').defaultValue) {
         fs.unlink(existingImageUrl, function (unlinkError) {
           if (unlinkError) {
             console.log(unlinkError);
             reject({success: false,
-              message: 'Error occurred while deleting old profile picture'
+              message: 'Error occurred while deleting old food picture'
             });
           } else {
             resolve();

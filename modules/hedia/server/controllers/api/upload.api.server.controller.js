@@ -92,42 +92,35 @@ exports.uploadImage = function(req, res, next) {
 
 
 
+var storage = multer.diskStorage({
+  destination: './modules/food/client/img/food/',
+  filename: function (req, file, callback) {
+    
+    crypto.pseudoRandomBytes(8, function(err, raw) {
+      if (err) return callback(err);
+    
+      callback(null, raw.toString('hex') + path.extname(file.originalname));
+    });
+
+  }
+});
+
+var upload = multer({storage: storage}).single('image');
+ 
 
 
 exports.uploadFoodImage = function(req, res) {
-
-
-  var storage = multer.diskStorage({
-    destination: './modules/food/client/img/food/',
-    filename: function (req, file, callback) {
-      
-      crypto.pseudoRandomBytes(8, function(err, raw) {
-        if (err) return callback(err);
-      
-        callback(null, raw.toString('hex') + path.extname(file.originalname));
-      });
   
+  
+  upload(req,res,function(err) {
+    if(err) {
+        return res.end("Error uploading file.");
     }
-  });
-  
-  var upload = multer({storage: storage}).single('image');
+    res.end("File is uploaded");
+});
 
  
-  upload(req, res, function () {
-    if (!req.file) {
-      console.log("No file received");
-      return res.send({
-        success: false
-      });
-  
-    } else {
-      console.log('file received');
-      return res.send({
-        success: true
-      })
-    }
-  
-  });
+
 
 
   

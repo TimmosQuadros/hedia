@@ -96,6 +96,8 @@ var storage = multer.diskStorage({
   destination: './modules/food/client/img/food/',
   filename: function (req, file, callback) {
     
+console.log(file)
+
     crypto.pseudoRandomBytes(8, function(err, raw) {
       if (err) return callback(err);
     

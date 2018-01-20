@@ -124,9 +124,9 @@ exports.uploadFoodImage =  function(req, res) {
     }
     res.end("File is uploaded");
     //console.log(file)
-  console.log(req)
+  console.log(req.body.image)
  
-  console.log(storage)
+  console.log(storage.filename)
   
 });
 

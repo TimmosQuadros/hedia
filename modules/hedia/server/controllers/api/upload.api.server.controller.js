@@ -103,20 +103,17 @@ exports.uploadFoodImage = function(req, res) {
     }
   });
 
-<<<<<<< HEAD
-  console.log(req.files.image);
-=======
-  //console.log(file)
->>>>>>> aba4919e65f29d41d6ade257e7b66d8219fcb700
-
+  
   var upload = multer({ storage : storage}).single('image');
 
   upload(req,res,function(err) {
     if(err) {
         return res.end("Error uploading file.");
     }
+    console.log(req.files);
+    res.send(files);
     res.end("File is uploaded");
-    res.send(files)
+    
 });
 };
 

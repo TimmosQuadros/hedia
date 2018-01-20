@@ -97,10 +97,13 @@ exports.uploadFoodImage = function(req, res) {
   var storage =   multer.diskStorage({
     destination: function (req, file, callback) {
       callback(null, './modules/food/client/img/food/');
+      console.log(req.protocol + "://" + req.host + '/' + req.file.path);
     },
     filename: function (req, file, callback) {
       callback(null, file.fieldname);
     }
+
+    
   });
 
   
@@ -108,7 +111,7 @@ exports.uploadFoodImage = function(req, res) {
 
   upload(req,res,function(err) {
     
-   console.log(req.protocol + "://" + req.host + '/' + req.file.path)
+
     console.log(req.file)
 
     if (!req.file) {

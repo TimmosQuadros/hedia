@@ -108,7 +108,7 @@ exports.uploadFoodImage = function(req, res) {
 }).single('image')
 
 
-
+console.log(req)
 
   uploadFile(req, res, function (uploadError) {
     if (uploadError) {

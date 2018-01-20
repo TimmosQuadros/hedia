@@ -97,6 +97,7 @@ exports.uploadFoodImage = function(req, res) {
   var existingImageFoodUrl;
   //console.log("Food: " +JSON.stringify(req.body.food));
   console.log("text: "+req.file);
+  console.log("textabe: "+req.body.food.title);
 
   // Filtering to upload only images
   upload.fileFilter = profileUploadFileFilter;

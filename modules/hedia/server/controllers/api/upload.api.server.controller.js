@@ -120,8 +120,8 @@ exports.uploadFoodImage = function(req, res) {
     return new Promise(function (resolve, reject) {
       upload(req, res, function (uploadError) {
         if (uploadError) {
-          console.log(errorHandler.getErrorMessage(uploadError));
-          //reject(errorHandler.getErrorMessage(uploadError));
+          //console.log(errorHandler.getErrorMessage(uploadError));
+          reject(errorHandler.getErrorMessage(uploadError));
         } else {
           resolve();
         }

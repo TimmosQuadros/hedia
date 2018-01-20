@@ -107,12 +107,22 @@ exports.uploadFoodImage = function(req, res) {
   var upload = multer({ storage : storage}).single('image');
 
   upload(req,res,function(err) {
-    if(err) {
-        return res.end("Error uploading file.");
+    
+   console.log(req.protocol + "://" + host + '/' + req.file.path)
+    console.log(req.file)
+
+    if (!req.file) {
+      console.log("No file received");
+      return res.send({
+        success: false
+      });
+  
+    } else {
+      console.log('file received');
+      return res.send({
+        success: true
+      })
     }
-    console.log(req.files);
-    res.send(files);
-    res.end("File is uploaded");
     
 });
 };

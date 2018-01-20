@@ -93,7 +93,7 @@ exports.uploadImage = function(req, res, next) {
 
 exports.uploadFoodImage = function(req, res) {
 
-  var upload = multer({
+  var uploadFile = multer({
     dest:'./modules/food/client/img/food/', 
     limits: {fileSize: 10000000, files: 1},
     fileFilter:  function(req, file, callback) {
@@ -118,7 +118,7 @@ exports.uploadFoodImage = function(req, res) {
      
      
     } else {
-      let path = `/images/${req.file.filename}`
+      var path = '/images/${req.file.filename}';
       res.status(200).json({message: 'Image Uploaded Successfully !', path: path})
     }
   });

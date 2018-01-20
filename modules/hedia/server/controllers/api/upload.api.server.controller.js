@@ -97,7 +97,8 @@ exports.uploadFoodImage = function(req, res) {
   var storage =   multer.diskStorage({
     destination: function (req, file, callback) {
       callback(null, './modules/food/client/img/food/');
-      console.log(req.protocol + "://" + req.host + '/' + req.file.path);
+     // console.log(req.protocol + "://" + req.host + '/' + req.file.path);
+     console.log(req)
     },
     filename: function (req, file, callback) {
       callback(null, file.fieldname);

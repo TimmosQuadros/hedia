@@ -109,7 +109,7 @@ exports.uploadFoodImage = upload.single('image'),function(req, res) {
     }
   });
   
-  var upload = multer({storage: storage}).single('image');
+  var upload = multer({storage: storage});
 
   if (!req.file) {
     console.log("No file received");

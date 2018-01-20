@@ -110,7 +110,7 @@ exports.uploadFoodImage = function(req, res) {
 
 console.log(req)
 
-  uploadFile(req.body.image, res, function (uploadError) {
+  /* uploadFile(req, res, function (uploadError) {
     if (uploadError) {
      
       res.status(400).json({message: uploadError.message})
@@ -123,5 +123,24 @@ console.log(req)
       res.status(200).json({message: 'Image Uploaded Successfully !'})
       
     }
-  });
+  }); */
+uploadImage().then(function () {
+  res.json({success: true});
+})
+.catch(function (err) {
+  res.send({success: false, message: err});
+});
+
+  function uploadImage () {
+    return new Promise(function (resolve, reject) {
+      uploadFile(req, res, function (uploadError) {
+        if (uploadError) {
+          reject(errorHandler.getErrorMessage(uploadError));
+        } else {
+          resolve();
+        }
+      });
+    });
+  }
+
 }

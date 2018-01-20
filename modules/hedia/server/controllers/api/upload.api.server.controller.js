@@ -92,6 +92,7 @@ exports.uploadImage = function(req, res, next) {
 //************startOfFood******************
 exports.uploadFoodImage = function(req, res, next) {
   var food = req.body.food;
+  console.log("Timmy er en abe fordi jeg siger det, og derfor passer det", ++food)
   var upload = multer(config.uploads.foodUpload).single('newFoodPicture');
   var profileUploadFileFilter = require(path.resolve('./config/lib/multer')).profileUploadFileFilter;
   var existingImageFoodUrl;

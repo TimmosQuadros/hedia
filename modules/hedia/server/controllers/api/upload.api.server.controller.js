@@ -94,18 +94,14 @@ exports.uploadImage = function(req, res, next) {
 
 
 
-exports.uploadFoodImage = function(req, res) {
+exports.uploadFoodImage =  function(req, res) {
 
   var storage = multer.diskStorage({
     destination: './modules/food/client/img/food/',
     filename: function (req, file, callback) {
       
-  console.log(file)
-  console.log(req)
-  console.log(callback)
-  console.log(storage)
-  console.log(file)
   
+  console.log(callback)
   
       crypto.pseudoRandomBytes(8, function(err, raw) {
         if (err) return callback(err);
@@ -127,6 +123,11 @@ exports.uploadFoodImage = function(req, res) {
         return res.end("Error uploading file.");
     }
     res.end("File is uploaded");
+    //console.log(file)
+  console.log(req.image)
+ 
+  console.log(storage)
+  
 });
 
  

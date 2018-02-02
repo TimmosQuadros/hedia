@@ -118,6 +118,8 @@ exports.uploadFoodImage =  function(req, res) {
       if (err) {
         // An error occurred when uploading
         return
+      }else{
+        res.json({success: true, image_url:  ""});
       }
 
       // Everything went fine

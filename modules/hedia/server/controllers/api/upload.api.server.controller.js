@@ -112,11 +112,7 @@ exports.uploadFoodImage =  function(req, res) {
     }
   });
 
-  var upload = multer({storage: storage}).single('image');
-
-
-
-
+  var upload = multer({ storage: storage })
 
   upload(req,res,function(err) {
     if(err) {

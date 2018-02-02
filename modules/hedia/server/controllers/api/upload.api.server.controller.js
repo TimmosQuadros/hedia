@@ -96,7 +96,7 @@ exports.uploadImage = function(req, res, next) {
 
 exports.uploadFoodImage =  function(req, res) {
 
-  var storage = multer.diskStorage({
+  /*var storage = multer.diskStorage({
     destination: './modules/food/client/img/food/',
     filename: function (req, file, callback) {
 
@@ -110,9 +110,18 @@ exports.uploadFoodImage =  function(req, res) {
       });
 
     }
-  });
+  });*/
 
-  var upload = multer(config.uploads.foodUpload).single('avatar');
+  var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './modules/food/client/img/food/')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.fieldname + '-' + Date.now())
+    }
+  })
+
+  var upload = multer({ storage: storage }).single('avatar');
 
   uploadImage().then(function () {
     res.json({success: true, image_url:  ""});

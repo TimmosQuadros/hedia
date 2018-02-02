@@ -114,7 +114,7 @@ exports.uploadFoodImage =  function(req, res) {
 
   var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, './modules/food/client/img/food/')
+      cb(null, './modules/users/client/img/profile/uploads/')
     },
     filename: function (req, file, cb) {
       cb(null, file.fieldname + '-' + Date.now())

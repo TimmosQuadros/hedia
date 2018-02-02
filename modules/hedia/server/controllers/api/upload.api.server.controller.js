@@ -114,16 +114,24 @@ exports.uploadFoodImage =  function(req, res) {
 
   var upload = multer({ storage: storage }).single('avatar');
 
-    upload(req, res, function (err) {
-      if (err) {
-        // An error occurred when uploading
-        return
-      }else{
-        res.json({success: true, image_url:  ""});
-      }
+  uploadImage().then(function () {
+    res.json({success: true, image_url:  ""});
+  })
+    .catch(function (err) {
+      res.send({success: false, message: err});
+    });
 
-      // Everything went fine
-    })
+  function uploadImage () {
+    return new Promise(function (resolve, reject) {
+      upload(req, res, function (uploadError) {
+        if (uploadError) {
+          reject(errorHandler.getErrorMessage(uploadError));
+        } else {
+          resolve();
+        }
+      });
+    });
+  }
 
 
   /*upload(req,res,function(err) {

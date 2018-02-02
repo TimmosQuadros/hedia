@@ -112,7 +112,7 @@ exports.uploadFoodImage =  function(req, res) {
     }
   });
 
-  var upload = multer({ storage: storage }).single('avatar');
+  var upload = multer(config.uploads.foodUpload).single('avatar');
 
   uploadImage().then(function () {
     res.json({success: true, image_url:  ""});

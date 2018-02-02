@@ -112,9 +112,19 @@ exports.uploadFoodImage =  function(req, res) {
     }
   });
 
-  var upload = multer({ storage: storage })
+  var upload = multer({ storage: storage });
 
-  upload(req,res,function(err) {
+    upload(req, res, function (err) {
+      if (err) {
+        // An error occurred when uploading
+        return
+      }
+      
+      // Everything went fine
+    })
+
+
+  /*upload(req,res,function(err) {
     if(err) {
         return res.end("Error uploading file.");
     }
@@ -124,7 +134,7 @@ exports.uploadFoodImage =  function(req, res) {
 
   console.log("storage: "+storage);
 
-});
+});*/
 
 
 

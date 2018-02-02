@@ -99,41 +99,41 @@ exports.uploadFoodImage =  function(req, res) {
   var storage = multer.diskStorage({
     destination: './modules/food/client/img/food/',
     filename: function (req, file, callback) {
-      
-  
-  console.log(callback)
-  
+
+
+  console.log("callback: "+callback);
+
       crypto.pseudoRandomBytes(8, function(err, raw) {
         if (err) return callback(err);
-      
+
         callback(null, raw.toString('hex') + path.extname(file.originalname));
       });
-  
+
     }
   });
-  
-  var upload = multer({storage: storage}).single('image');
-   
-  
 
-  
-  
+  var upload = multer({storage: storage}).single('image');
+
+
+
+
+
   upload(req,res,function(err) {
     if(err) {
         return res.end("Error uploading file.");
     }
     res.end("File is uploaded");
     //console.log(file)
-  console.log(req.image)
- 
-  console.log(storage)
-  
+  console.log("req.image: "+req.image);
+
+  console.log("storage: "+storage);
+
 });
 
- 
 
 
 
-  
+
+
 };
 

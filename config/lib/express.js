@@ -83,6 +83,7 @@ module.exports.initMiddleware = function (app) {
   app.use(bodyParser.urlencoded({
     extended: true
   }));
+  app.use(bodyParser({limit: '50mb'}));
   app.use(bodyParser.json());
   app.use(methodOverride());
 
